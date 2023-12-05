@@ -1,41 +1,45 @@
-CREATE DATABASE JobForge_OdhranH;
-
+CREATE DATABASE IF NOT EXISTS JobForge_OdhranH;
+DELIMITER $$
+DROP PROCEDURE IF EXISTS CreateDatabse $$
+CREATE PROCEDURE CreateDatabse()
+BEGIN
+  START TRANSACTION;
 USE JobForge_OdhranH;
 
 
-CREATE TABLE Band(
+CREATE TABLE IF NOT EXISTS Band(
 	BandName VARCHAR(20) PRIMARY KEY,
     BandLevel VARCHAR(10),
     Competencies VARCHAR(100)
 );
 
-CREATE TABLE Training(
+CREATE TABLE  IF NOT EXISTS Training(
 	TrainingName VARCHAR(20) PRIMARY KEY,
     BandName VARCHAR(20),
     TrainingType VARCHAR(20),
     FOREIGN KEY(BandName) REFERENCES Band(BandName)
 );
 
-CREATE TABLE Employee(
+CREATE TABLE IF NOT EXISTS Employee(
 	EmployeeID INTEGER PRIMARY KEY,
     EmployeeName VARCHAR(50),
     EmployeePhoto VARCHAR(100),
     EmployeeMessage VARCHAR(100)
 );
 
-CREATE TABLE Capability(
+CREATE TABLE IF NOT EXISTS Capability(
 	CapabilityName VARCHAR(30) PRIMARY KEY,
     LeadID INTEGER,
     FOREIGN KEY(LeadID) REFERENCES Employee(EmployeeID)
 );
 
-CREATE TABLE JobFamily(
+CREATE TABLE IF NOT EXISTS JobFamily(
 	JobFamily VARCHAR(30) PRIMARY KEY,
     CapabilityName VARCHAR(30),
     FOREIGN KEY(CapabilityName) REFERENCES Capability(CapabilityName)
 );
 
-CREATE TABLE JobRole(
+CREATE TABLE IF NOT EXISTS JobRole(
 	RoleName VARCHAR(20) PRIMARY KEY,
     Specification VARCHAR(100),
     CapabilityName VARCHAR(20),
@@ -45,6 +49,17 @@ CREATE TABLE JobRole(
     FOREIGN KEY(BandName) REFERENCES Band(BandName),
     FOREIGN KEY(CapabilityName) REFERENCES Capability(CapabilityName)
 );
-
-
-GRANT ALL privileges on `JobForge_OdhranH`.* to JosephM, CriofanMc, ConorT;
+-- check the number of affected rows
+  GET DIAGNOSTICS @rows = ROW_COUNT;
+  IF @rows = 0 THEN
+    -- if an error occurred,
+    ROLLBACK;
+    SELECT 'Transaction rolled back due to error.';
+  ELSE
+    -- If no error occurred, commit the Transaction
+    COMMIT;
+    SELECT 'Transaction committed successfully.';
+END IF;
+END $$
+DELIMITER ;
+CALL CreateDatabse();
