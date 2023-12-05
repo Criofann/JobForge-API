@@ -9,7 +9,7 @@ public class Example {
                 System.out.println("x is equal to 2");
                 break;
             default:
-                System.out.println("x is not equal to 1 or 2");
+                
         }
     }
 }
