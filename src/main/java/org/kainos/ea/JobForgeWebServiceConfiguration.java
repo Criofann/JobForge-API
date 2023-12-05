@@ -8,14 +8,13 @@ import org.hibernate.validator.constraints.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
-public class DropwizardWebServiceConfiguration extends Configuration {
-
+public class JobForgeWebServiceConfiguration extends Configuration {
     @Valid
     @NotNull
     private final SwaggerBundleConfiguration swagger = new SwaggerBundleConfiguration();
 
     @JsonProperty("swagger")
-    public SwaggerBundleConfiguration getSwagger() {
+    public SwaggerBundleConfiguration getSwagger(){
         swagger.setResourcePackage("org.kainos.ea.resources");
         String[] schemes = {"http", "https"};
         swagger.setSchemes(schemes);
