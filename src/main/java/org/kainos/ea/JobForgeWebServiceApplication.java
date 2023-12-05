@@ -33,5 +33,4 @@ public class JobForgeWebServiceApplication extends Application<JobForgeWebServic
                     final Environment environment) {
         environment.jersey().register(new RoleController());
     }
-
 }
