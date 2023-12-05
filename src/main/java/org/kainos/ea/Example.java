@@ -1,3 +1,4 @@
+package org.kainos.ea;
 /**
  * This is an example class.
  */
