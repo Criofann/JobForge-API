@@ -1,4 +1,4 @@
-## JobForgeWebService
+# JobForgeWebService
 
 ## How to start the JobForgeWebService application
 ---
