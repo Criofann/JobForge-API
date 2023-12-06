@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS Capability(
 
 CREATE TABLE IF NOT EXISTS JobFamily(
 	JobFamily VARCHAR(30) PRIMARY KEY,
-    CapabilityName VARCHAR(30),
-    FOREIGN KEY(CapabilityName) REFERENCES Capability(CapabilityName)
+    RoleName VARCHAR(30),
+    FOREIGN KEY(RoleName) REFERENCES JobRole(RoleName)
 );
 
 CREATE TABLE IF NOT EXISTS JobRole(
