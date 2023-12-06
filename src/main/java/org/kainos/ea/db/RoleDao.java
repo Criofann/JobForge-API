@@ -16,7 +16,7 @@ public class RoleDao {
         Connection c = DatabaseConnector.getConnection();
 
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("SELECT RoleName, Specification, Responsibilities, SharepointLink FROM `JobRole`;");
+        ResultSet rs = st.executeQuery("SELECT RoleName, Specification, CapabilityName, Responsibilities, SharepointLink FROM `JobRole`;");
 
         List<Role> roleList = new ArrayList<>();
 
@@ -24,6 +24,7 @@ public class RoleDao {
             Role jobRole = new Role(
                     rs.getString("RoleName"),
                     rs.getString("Specification"),
+                    rs.getString("CapabilityName"),
                     rs.getString("Responsibilities"),
                     rs.getString("SharepointLink")
             );
