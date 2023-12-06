@@ -1,17 +1,16 @@
 package org.kainos.ea.db;
 
-import io.swagger.annotations.Api;
+import org.kainos.ea.cli.JobFamilyRequest;
+import org.kainos.ea.cli.JobRequest;
 import org.kainos.ea.cli.Role;
 
-import javax.ws.rs.Path;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoleDao {
+    private DatabaseConnector databaseConnector = new DatabaseConnector();
+
     public List<Role> getRoles() throws SQLException {
         Connection c = DatabaseConnector.getConnection();
 
@@ -20,7 +19,7 @@ public class RoleDao {
 
         List<Role> roleList = new ArrayList<>();
 
-        while (rs.next()){
+        while (rs.next()) {
             Role jobRole = new Role(
                     rs.getString("RoleName"),
                     rs.getString("Specification"),
@@ -30,5 +29,36 @@ public class RoleDao {
             roleList.add(jobRole);
         }
         return roleList;
+    }
+
+    public int createJob(JobRequest jobRequest) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+        String insertStatment = "INSERT INTO  JobRole (RoleName, Specification, CapabilityName, Responsibilities, Sharepointlink ) VALUES(?,?,?,?,?)";
+        PreparedStatement st = c.prepareStatement(insertStatment, Statement.RETURN_GENERATED_KEYS);
+
+        st.setString(1, jobRequest.getRoleName());
+        st.setString(2, jobRequest.getSpecification());
+        st.setString(3, jobRequest.getCapabilityName());
+        st.setString(4, jobRequest.getResponsibilities());
+        st.setString(5, jobRequest.getSharepointLink());
+
+
+        st.executeUpdate();
+
+
+        return 0;
+    }
+    public int createJobFamiliy(JobFamilyRequest jobFamilyRequest) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+        String insertStatment = "INSERT INTO  JobFmily (JobFamily,RoleName) VALUES(?,?)";
+        PreparedStatement st = c.prepareStatement(insertStatment, Statement.RETURN_GENERATED_KEYS);
+
+        st.setString(1, jobFamilyRequest.getRoleName());
+        st.setString(2, jobFamilyRequest.getJobfamily());
+
+        st.executeUpdate();
+
+
+        return 0;
     }
 }
