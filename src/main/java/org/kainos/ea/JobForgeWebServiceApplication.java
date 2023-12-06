@@ -5,6 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.kainos.ea.resources.BandController;
 import org.kainos.ea.resources.RoleController;
 
 public class JobForgeWebServiceApplication extends Application<JobForgeWebServiceConfiguration> {
@@ -32,5 +33,6 @@ public class JobForgeWebServiceApplication extends Application<JobForgeWebServic
     public void run(final JobForgeWebServiceConfiguration configuration,
                     final Environment environment) {
         environment.jersey().register(new RoleController());
+        environment.jersey().register(new BandController());
     }
 }
