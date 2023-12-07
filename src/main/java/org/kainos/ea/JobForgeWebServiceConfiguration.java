@@ -3,14 +3,13 @@ package org.kainos.ea;
 import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import org.hibernate.validator.constraints.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 
 public class JobForgeWebServiceConfiguration extends Configuration {
     @Valid
-    @NotNull
+    @NotNull // Test to see if it passes linter
     private final SwaggerBundleConfiguration swagger = new SwaggerBundleConfiguration();
 
     @JsonProperty("swagger")
