@@ -3,9 +3,7 @@ package org.kainos.ea.api;
 import org.kainos.ea.cli.JobFamilyRequest;
 import org.kainos.ea.cli.JobRequest;
 import org.kainos.ea.cli.Role;
-import org.kainos.ea.client.FailedToCreateJobException;
-import org.kainos.ea.client.FailedToGetRolesException;
-import org.kainos.ea.client.InvalidJobException;
+import org.kainos.ea.client.*;
 import org.kainos.ea.core.JobFamilyValidator;
 import org.kainos.ea.core.JobValidator;
 import org.kainos.ea.db.RoleDao;
@@ -51,9 +49,9 @@ public class RoleService {
         String validation = jobFamilyValidator.isValidJobFamily(jobFamilyRequest);
 
         if (validation != null) {
-            throw new InvalidJobException(validation);
+            throw new InvalidJobFamilyException(validation);
         }
-        int id = roleDao.createJob(jobFamilyRequest);
+        int id = roleDao.createJobFamiliy(jobFamilyRequest);
         return id;
     } catch (SQLException e) {
         System.err.println(e.getMessage());

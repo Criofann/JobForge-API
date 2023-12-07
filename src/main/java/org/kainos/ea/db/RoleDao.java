@@ -50,11 +50,11 @@ public class RoleDao {
     }
     public int createJobFamiliy(JobFamilyRequest jobFamilyRequest) throws SQLException {
         Connection c = databaseConnector.getConnection();
-        String insertStatment = "INSERT INTO  JobFmily (JobFamily,RoleName) VALUES(?,?)";
+        String insertStatment = "INSERT INTO  JobFamily (JobFamily,RoleName) VALUES(?,?)";
         PreparedStatement st = c.prepareStatement(insertStatment, Statement.RETURN_GENERATED_KEYS);
 
-        st.setString(1, jobFamilyRequest.getRoleName());
-        st.setString(2, jobFamilyRequest.getJobfamily());
+        st.setString(1, jobFamilyRequest.getJobfamily());
+        st.setString(2, jobFamilyRequest.getRoleName());
 
         st.executeUpdate();
 

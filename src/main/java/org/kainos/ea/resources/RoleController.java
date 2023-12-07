@@ -4,9 +4,7 @@ import io.swagger.annotations.Api;
 import org.kainos.ea.api.RoleService;
 import org.kainos.ea.cli.JobFamilyRequest;
 import org.kainos.ea.cli.JobRequest;
-import org.kainos.ea.client.FailedToCreateJobException;
-import org.kainos.ea.client.FailedToGetRolesException;
-import org.kainos.ea.client.InvalidJobException;
+import org.kainos.ea.client.*;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
