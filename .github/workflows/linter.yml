@@ -1,15 +1,22 @@
-name: API Linter
-on: pull_request
+name: Lint Code Base
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
-  checkstyle_job:
+  run-lint:
     runs-on: ubuntu-latest
-    name: Checkstyle job
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Run check style
-        uses: nikitasavinov/checkstyle-action@master
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: 'github-pr-check'
-          tool_name: 'JobForge API Linter'
+          fetch-depth: 0
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: "main"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
