@@ -68,9 +68,12 @@ public class Role {
     }
 
     public Role(String roleName, String specification,
+                String capabilityName,
                 String responsibilities, String sharepointLink) {
+
         this.roleName = roleName;
         this.specification = specification;
+        this.capabilityName = capabilityName;
         this.responsibilities = responsibilities;
         this.sharepointLink = sharepointLink;
     }
