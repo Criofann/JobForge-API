@@ -13,7 +13,7 @@ import java.util.List;
 public class RoleDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Role> getRoles() throws SQLException {
-        Connection c = DatabaseConnector.getConnection();
+        Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery("SELECT RoleName, Specification, Responsibilities, SharepointLink FROM `JobRole`;");
