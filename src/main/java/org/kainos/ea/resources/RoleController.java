@@ -45,9 +45,9 @@ public class RoleController {
         }
     }
     @PUT
-    @Path("/update-roles/{roleName}")
+    @Path("/update-roles/{RoleName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateRole(@PathParam("roleName") String roleName, RoleRequest role) {
+    public Response updateRole(@PathParam("RoleName") String roleName, RoleRequest role) {
         try {
             roleService.updateRole(roleName, role);
 
