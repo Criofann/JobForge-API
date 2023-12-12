@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RoleService {
-    RoleDao roleDao = new RoleDao();
+    private RoleDao roleDao = new RoleDao();
     public List<Role> getRoles() throws FailedToGetRolesException {
         List<Role> roleList;
         try {
