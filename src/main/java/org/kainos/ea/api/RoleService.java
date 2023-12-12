@@ -38,6 +38,9 @@ public class RoleService {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             throw new FailedToCreateJobException();
+        } catch (JobNameTooLongException | JobSpecTooLongException | JobCapabilityTooLongException |
+                 JobBandTooLongException | ResponsibilityTooLongException | NotURLException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -56,7 +59,9 @@ public class RoleService {
     } catch (SQLException e) {
         System.err.println(e.getMessage());
         throw new FailedToCreateJobFamilyException();
+    } catch (JobNameTooLongException | JobFamilyTooLongException e) {
+        throw new RuntimeException(e);
     }
 
-}
+    }
 }

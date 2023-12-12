@@ -1,30 +1,31 @@
 package org.kainos.ea.core;
 
 import org.kainos.ea.cli.JobRequest;
+import org.kainos.ea.client.*;
 
 import java.net.URL;
 
 public class JobValidator {
-    public String isValidJob(JobRequest jobRequest){
+    public String isValidJob(JobRequest jobRequest) throws JobNameTooLongException, JobSpecTooLongException, JobCapabilityTooLongException, JobBandTooLongException, ResponsibilityTooLongException, NotURLException {
         if(jobRequest.getRoleName().length()>20){
-            return "name greater than 20 charactors";
+            throw new JobNameTooLongException();
         }
         if (jobRequest.getSpecification().length() > 100) {
-            return "spec greater than 100 charactors";
+            throw new JobSpecTooLongException();
         }
         if(jobRequest.getCapabilityName().length()>20){
-            return "name greater than 20 charactors";
+            throw new JobCapabilityTooLongException();
         }
         if(jobRequest.getBandName().length()>20){
-            return "name greater than 20 charactors";
+            throw new JobBandTooLongException();
         }
         if (jobRequest.getResponsibilities().length() > 100) {
-            return "spec greater than 100 charactors";
+            throw new ResponsibilityTooLongException();
         }
 
         if (!isURL(jobRequest.getSharepointLink())) {
 
-            return "Not a valid link";
+            throw new NotURLException();
         }
         return null;
     }

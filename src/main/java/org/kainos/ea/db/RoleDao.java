@@ -53,7 +53,7 @@ public class RoleDao {
         String insertStatment = "INSERT INTO  JobFamily (JobFamily,RoleName) VALUES(?,?)";
         PreparedStatement st = c.prepareStatement(insertStatment, Statement.RETURN_GENERATED_KEYS);
 
-        st.setString(1, jobFamilyRequest.getJobfamily());
+        st.setString(1, jobFamilyRequest.getJobFamily());
         st.setString(2, jobFamilyRequest.getRoleName());
 
         st.executeUpdate();

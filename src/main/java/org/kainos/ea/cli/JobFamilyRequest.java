@@ -4,15 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JobFamilyRequest {
-    private String Jobfamily;
+    private String JobFamily;
     private String RoleName;
 
-    public String getJobfamily() {
-        return Jobfamily;
+    public String getJobFamily() {
+        return JobFamily;
     }
 
-    public void setJobfamily(String jobfamily) {
-        Jobfamily = jobfamily;
+    public void setJobFamily(String jobFamily) {
+        JobFamily = jobFamily;
     }
 
     public String getRoleName() {
@@ -25,10 +25,10 @@ public class JobFamilyRequest {
     @JsonCreator
     public JobFamilyRequest(
             @JsonProperty("roleName") String roleName,
-            @JsonProperty("JobFamily") String jobfamily
+            @JsonProperty("JobFamily") String jobFamily
     )
     {
-        this.Jobfamily = jobfamily;
+        this.JobFamily = jobFamily;
         this.RoleName = roleName;
     }
 }

@@ -58,6 +58,10 @@ public class JobRequest {
     public void setSharepointLink(String sharepointLink) {
         this.sharepointLink = sharepointLink;
     }
+
+    public JobRequest() {
+    }
+
     @JsonCreator
     public JobRequest(
             @JsonProperty("roleName") String roleName,

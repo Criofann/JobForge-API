@@ -1,16 +1,17 @@
 package org.kainos.ea.core;
 
 import org.kainos.ea.cli.JobFamilyRequest;
-import org.kainos.ea.cli.JobRequest;
+import org.kainos.ea.client.JobFamilyTooLongException;
+import org.kainos.ea.client.JobNameTooLongException;
 
 public class JobFamilyValidator {
-    public String isValidJobFamily(JobFamilyRequest jobFamilyRequest) {
+    public String isValidJobFamily(JobFamilyRequest jobFamilyRequest) throws JobNameTooLongException, JobFamilyTooLongException {
         if (jobFamilyRequest.getRoleName().length() > 20) {
-            return "name greater than 20 charactors";
+            throw new JobNameTooLongException();
         }
 
-        if (jobFamilyRequest.getJobfamily().length() > 20) {
-            return "name greater than 20 charactors";
+        if (jobFamilyRequest.getJobFamily().length() > 20) {
+            throw new JobFamilyTooLongException();
         }
         return null;
     }
