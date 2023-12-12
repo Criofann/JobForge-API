@@ -56,7 +56,9 @@ public class Role {
         this.sharepointLink = sharepointLink;
     }
 
-    public Role(String roleName, String specification, String capabilityName, String bandName, String responsibilities, String sharepointLink) {
+    public Role(String roleName, String specification,
+                String capabilityName, String bandName,
+                String responsibilities, String sharepointLink) {
         this.roleName = roleName;
         this.specification = specification;
         this.capabilityName = capabilityName;
@@ -65,7 +67,8 @@ public class Role {
         this.sharepointLink = sharepointLink;
     }
 
-    public Role(String roleName, String specification, String responsibilities, String sharepointLink) {
+    public Role(String roleName, String specification,
+                String responsibilities, String sharepointLink) {
         this.roleName = roleName;
         this.specification = specification;
         this.responsibilities = responsibilities;
