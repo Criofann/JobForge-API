@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 public class JobForgeWebServiceConfiguration extends Configuration {
     @Valid
-    @NotNull // Test to see if it passes linter
+    @NotNull
     private final SwaggerBundleConfiguration swagger =
             new SwaggerBundleConfiguration();
 
