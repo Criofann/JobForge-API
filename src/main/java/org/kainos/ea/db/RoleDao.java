@@ -12,13 +12,13 @@ import javax.ws.rs.Path;
 
 public class RoleDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
-    public List<Role> getRoles() throws SQLException {
+    public List<Role> getRoles(Connection conn) throws SQLException {
         Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT RoleName, Specification, "
-                + "Responsibilities, SharepointLink FROM `JobRole`;");
+        ResultSet rs = st.executeQuery("SELECT RoleName, Specification, CapabilityName," +
+                " Responsibilities, SharepointLink FROM `JobRole`;");
 
 
         List<Role> roleList = new ArrayList<>();

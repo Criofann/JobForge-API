@@ -7,14 +7,25 @@ import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.client.FailedToUpdateRoleException;
 import org.kainos.ea.client.InvalidRoleException;
 import org.kainos.ea.client.RoleDoesNotExistException;
+import org.kainos.ea.db.DatabaseConnector;
+import org.kainos.ea.db.RoleDao;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.crypto.Data;
 
 @Api("JobForge Dropwizard API")
 @Path("/api")
 public class RoleController {
-    private RoleService roleService = new RoleService();
+
+    private static RoleService roleService;
+
+    public RoleController() {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        roleService = new RoleService(new RoleDao(), databaseConnector);
+    }
+
     @GET
     @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)

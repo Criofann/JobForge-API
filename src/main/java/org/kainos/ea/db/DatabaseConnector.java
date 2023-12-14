@@ -6,9 +6,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public final class DatabaseConnector {
+public class DatabaseConnector {
 
     private static Connection conn;
+
+    public DatabaseConnector() {
+    }
 
     public static Connection getConnection() throws SQLException {
         String user;

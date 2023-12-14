@@ -6,6 +6,7 @@ import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.client.FailedToUpdateRoleException;
 import org.kainos.ea.client.InvalidRoleException;
 import org.kainos.ea.client.RoleDoesNotExistException;
+import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
 import org.kainos.ea.core.RoleValidator;
 
@@ -13,11 +14,26 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RoleService {
-    private RoleDao roleDao = new RoleDao();
+    private RoleDao roleDao;
+    private DatabaseConnector databaseConnector;
+
+    public RoleService(RoleDao roleDao, DatabaseConnector databaseConnector) {
+        this.roleDao = roleDao;
+        this.databaseConnector = databaseConnector;
+    }
+
+    public RoleDao getJobRolesDao() {
+        return roleDao;
+    }
+
+    public DatabaseConnector getDatabaseConnector() {
+        return databaseConnector;
+    }
+
     public List<Role> getRoles() throws FailedToGetRolesException {
         List<Role> roleList;
         try {
-            roleList = roleDao.getRoles();
+            roleList = roleDao.getRoles(DatabaseConnector.getConnection());
 
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
