@@ -20,6 +20,7 @@ import javax.xml.crypto.Data;
 public class RoleController {
 
     private static RoleService roleService;
+    private DatabaseConnector databaseConnector;
 
     public RoleController() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
@@ -31,7 +32,7 @@ public class RoleController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRoles() {
         try {
-            return Response.ok(roleService.getRoles()).build();
+            return Response.ok(roleService.getRoles(this.databaseConnector)).build();
         } catch (FailedToGetRolesException e) {
             System.err.println(e.getMessage());
 

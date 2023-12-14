@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BandDao {
+
+    DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Band> getBands() throws SQLException {
-        Connection c = DatabaseConnector.getConnection();
+        Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery("SELECT BandName, BandLevel, Competencies FROM `Band`;");

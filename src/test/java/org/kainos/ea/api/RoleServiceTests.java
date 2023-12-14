@@ -25,11 +25,11 @@ public class RoleServiceTests {
 
     DatabaseConnector databaseConnector = mock(DatabaseConnector.class);
     RoleDao roleDao = mock(RoleDao.class);
-    RoleService roleService = new RoleService(roleDao, databaseConnector);
+    RoleService roleService = new RoleService(roleDao, new DatabaseConnector());
 
     Connection c;
 
-   // private RoleService roleService = new RoleService(roleDao, databaseConnector);
+    //private RoleService roleService = new RoleService(roleDao, databaseConnector);
 
     @Test
     public void getRoles_ShouldReturnRoles_WhenDaoReturnsRoles() throws SQLException, FailedToGetRolesException{
@@ -41,6 +41,6 @@ public class RoleServiceTests {
         when(databaseConnector.getConnection()).thenReturn(c);
         when(roleDao.getRoles(c)).thenReturn(roles);
 
-        assertEquals(roles, roleService.getRoles());
+        assertEquals(roles, roleService.getRoles(databaseConnector));
     }
 }

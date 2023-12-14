@@ -8,12 +8,12 @@ import java.util.Properties;
 
 public class DatabaseConnector {
 
-    private static Connection conn;
+    private Connection conn;
 
     public DatabaseConnector() {
     }
 
-    public static Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         String user;
         String password;
         String host;

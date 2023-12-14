@@ -13,9 +13,9 @@ import javax.ws.rs.Path;
 public class RoleDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Role> getRoles(Connection conn) throws SQLException {
-        Connection c = databaseConnector.getConnection();
+        //Connection c = conn.getConnection();
 
-        Statement st = c.createStatement();
+        Statement st = conn.createStatement();
 
         ResultSet rs = st.executeQuery("SELECT RoleName, Specification, CapabilityName," +
                 " Responsibilities, SharepointLink FROM `JobRole`;");
