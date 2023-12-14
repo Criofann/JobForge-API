@@ -15,6 +15,7 @@ public final class RoleDao {
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery("SELECT RoleName, Specification, "
+                + "CapabilityName, "
                 + "Responsibilities, SharepointLink FROM `JobRole`;");
 
 
