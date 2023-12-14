@@ -7,8 +7,7 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.ea.resources.RoleController;
 
-public class JobForgeWebServiceApplication
-        extends Application<JobForgeWebServiceConfiguration> {
+public class JobForgeWebServiceApplication extends Application<JobForgeWebServiceConfiguration> {
 
     public static void main(final String[] args) throws Exception {
         new JobForgeWebServiceApplication().run(args);
@@ -20,14 +19,10 @@ public class JobForgeWebServiceApplication
     }
 
     @Override
-    public void
-    initialize(final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
-        bootstrap.addBundle(
-                new SwaggerBundle<JobForgeWebServiceConfiguration>() {
+    public void initialize(final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
+        bootstrap.addBundle(new SwaggerBundle<JobForgeWebServiceConfiguration>(){
             @Override
-            protected SwaggerBundleConfiguration
-            getSwaggerBundleConfiguration(
-                    JobForgeWebServiceConfiguration configuration) {
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(JobForgeWebServiceConfiguration configuration){
                 return configuration.getSwagger();
             }
         });
@@ -38,4 +33,5 @@ public class JobForgeWebServiceApplication
                     final Environment environment) {
         environment.jersey().register(new RoleController());
     }
+
 }
