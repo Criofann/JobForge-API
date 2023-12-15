@@ -35,4 +35,5 @@ public class JobForgeWebServiceApplication extends Application<JobForgeWebServic
         environment.jersey().register(new RoleController());
         environment.jersey().register(new BandController());
     }
+
 }
