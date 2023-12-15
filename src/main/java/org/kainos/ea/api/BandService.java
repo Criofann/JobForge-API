@@ -1,6 +1,7 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.cli.Band;
+import org.kainos.ea.client.BandDoesNotExistException;
 import org.kainos.ea.client.FailedToGetBandsException;
 import org.kainos.ea.db.BandDao;
 import java.sql.SQLException;
@@ -18,5 +19,18 @@ public class BandService {
         }
 
         return bandList;
+    }
+    public Band getBandByJobRole(String roleName) throws FailedToGetBandsException, BandDoesNotExistException {
+        try {
+            Band band = bandDao.getBandByJobRole(roleName);
+            if (band == null) {
+                throw new BandDoesNotExistException();
+            }
+            return band;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToGetBandsException();
+        }
     }
 }

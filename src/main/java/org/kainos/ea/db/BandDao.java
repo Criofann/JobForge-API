@@ -27,4 +27,22 @@ public class BandDao {
         }
         return bandList;
     }
+    public Band getBandByJobRole(String roleName) throws SQLException {
+        Connection connection = DatabaseConnector.getConnection();
+
+        Statement statement = connection.createStatement();
+
+        ResultSet resultSet = statement.executeQuery("SELECT JobRole.RoleName, Band.BandLevel, Band.Competencies " +
+                    "FROM JobRole JOIN Band ON JobRole.BandName = Band.BandName WHERE JobRole.RoleName = '" + roleName + "'");
+
+        while (resultSet.next()) {
+             return new Band(
+                roleName,
+                resultSet.getString("BandLevel"),
+                resultSet.getString("Competencies")
+            );
+        }
+
+        return null;
+    }
 }

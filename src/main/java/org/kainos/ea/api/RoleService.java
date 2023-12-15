@@ -4,6 +4,7 @@ import org.kainos.ea.cli.Role;
 import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.db.RoleDao;
 
+import javax.management.relation.RoleInfoNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
