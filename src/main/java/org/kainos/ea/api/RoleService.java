@@ -6,19 +6,43 @@ import org.kainos.ea.cli.Role;
 import org.kainos.ea.client.*;
 import org.kainos.ea.core.JobFamilyValidator;
 import org.kainos.ea.core.JobValidator;
+import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+
+
+
 public class RoleService {
-    RoleDao roleDao = new RoleDao();
+    private RoleDao roleDao;
+    private DatabaseConnector databaseConnector;
+
+    public RoleService(RoleDao roleDao, DatabaseConnector databaseConnector) {
+        this.roleDao = roleDao;
+        this.databaseConnector = databaseConnector;
+    }
+
+    public RoleDao getJobRolesDao() {
+        return roleDao;
+    }
+
+    public DatabaseConnector getDatabaseConnector() {
+        return databaseConnector;
+    }
+
     private JobValidator jobValidator = new JobValidator();
     private JobFamilyValidator jobFamilyValidator = new JobFamilyValidator();
-    public List<Role> getRoles() throws FailedToGetRolesException {
+
+
+
+
+    public List<Role> getRoles(DatabaseConnector connector) throws FailedToGetRolesException {
         List<Role> roleList;
         try {
-            roleList = roleDao.getRoles();
+            roleList = roleDao.getRoles(connector.getConnection());
 
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
@@ -26,35 +50,32 @@ public class RoleService {
 
         return roleList;
     }
-    public int createJob(JobRequest jobRequest) throws FailedToCreateJobException, InvalidJobException {
-        try {
-            String validation = jobValidator.isValidJob(jobRequest);
+    public int createJob(JobRequest jobRequest) throws FailedToCreateJobException, SQLException, InvalidJobException {
+       try {
+           Boolean validation = jobValidator.isValidJob(jobRequest);
 
-            if (validation != null) {
-                throw new InvalidJobException(validation);
-            }
-            int id = roleDao.createJob(jobRequest);
-            return id;
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-            throw new FailedToCreateJobException();
-        } catch (JobNameTooLongException | JobSpecTooLongException | JobCapabilityTooLongException |
-                 JobBandTooLongException | ResponsibilityTooLongException | NotURLException e) {
+
+           int id;
+           try {
+               id = roleDao.createJob(jobRequest, databaseConnector.getConnection());
+               return id;
+           } catch (SQLException e) {
+               throw new SQLException();
+           }
+
+       } catch (JobNameTooLongException | JobSpecTooLongException | JobCapabilityTooLongException | JobBandTooLongException | ResponsibilityTooLongException | NotURLException e) {
             throw new RuntimeException(e);
-        }
-
+       }
     }
 
     public int createJobFamily(JobFamilyRequest jobFamilyRequest)
             throws FailedToCreateJobFamilyException, InvalidJobFamilyException {
 
     try {
-        String validation = jobFamilyValidator.isValidJobFamily(jobFamilyRequest);
+        Boolean validation = jobFamilyValidator.isValidJobFamily(jobFamilyRequest);
 
-        if (validation != null) {
-            throw new InvalidJobFamilyException(validation);
-        }
-        int id = roleDao.createJobFamiliy(jobFamilyRequest);
+
+        int id = roleDao.createJobFamiliy(jobFamilyRequest, databaseConnector.getConnection());
         return id;
     } catch (SQLException e) {
         System.err.println(e.getMessage());

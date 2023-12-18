@@ -6,7 +6,7 @@ import org.kainos.ea.client.*;
 import java.net.URL;
 
 public class JobValidator {
-    public String isValidJob(JobRequest jobRequest) throws JobNameTooLongException, JobSpecTooLongException, JobCapabilityTooLongException, JobBandTooLongException, ResponsibilityTooLongException, NotURLException {
+    public Boolean isValidJob(JobRequest jobRequest) throws JobNameTooLongException, JobSpecTooLongException, JobCapabilityTooLongException, JobBandTooLongException, ResponsibilityTooLongException, NotURLException {
         if(jobRequest.getRoleName().length()>20){
             throw new JobNameTooLongException();
         }
@@ -27,7 +27,8 @@ public class JobValidator {
 
             throw new NotURLException();
         }
-        return null;
+        System.out.println("mock validator not working");
+        return true;
     }
 
     private boolean isURL(String sharepointLink) {

@@ -24,7 +24,7 @@ public class JobValidatorTest {
 
         );
 
-        assertNull(jobValidator.isValidJob(jobRequest));
+        assertTrue(jobValidator.isValidJob(jobRequest));
     }
     @Test
     public void isValidJob_shouldThrowJobNameTooLongException_whenNameToLong() {

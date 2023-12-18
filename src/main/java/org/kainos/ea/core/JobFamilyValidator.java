@@ -5,7 +5,7 @@ import org.kainos.ea.client.JobFamilyTooLongException;
 import org.kainos.ea.client.JobNameTooLongException;
 
 public class JobFamilyValidator {
-    public String isValidJobFamily(JobFamilyRequest jobFamilyRequest) throws JobNameTooLongException, JobFamilyTooLongException {
+    public boolean isValidJobFamily(JobFamilyRequest jobFamilyRequest) throws JobNameTooLongException, JobFamilyTooLongException {
         if (jobFamilyRequest.getRoleName().length() > 20) {
             throw new JobNameTooLongException();
         }
@@ -13,6 +13,6 @@ public class JobFamilyValidator {
         if (jobFamilyRequest.getJobFamily().length() > 20) {
             throw new JobFamilyTooLongException();
         }
-        return null;
+        return true;
     }
 }

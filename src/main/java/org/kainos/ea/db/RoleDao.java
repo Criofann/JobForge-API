@@ -10,9 +10,8 @@ import java.util.List;
 
 public class RoleDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
-
-    public List<Role> getRoles() throws SQLException {
-        Connection c = DatabaseConnector.getConnection();
+    public List<Role> getRoles(Connection conn) throws SQLException {
+        Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery("SELECT RoleName, Specification, Responsibilities, SharepointLink FROM `JobRole`;");
@@ -31,8 +30,8 @@ public class RoleDao {
         return roleList;
     }
 
-    public int createJob(JobRequest jobRequest) throws SQLException {
-        Connection c = databaseConnector.getConnection();
+    public int createJob(JobRequest jobRequest, Connection conn) throws SQLException {
+        Connection c =  conn;
         String insertStatment = "INSERT INTO  JobRole (RoleName, Specification, CapabilityName, Responsibilities, Sharepointlink ) VALUES(?,?,?,?,?)";
         PreparedStatement st = c.prepareStatement(insertStatment, Statement.RETURN_GENERATED_KEYS);
 
@@ -48,17 +47,25 @@ public class RoleDao {
 
         return 0;
     }
-    public int createJobFamiliy(JobFamilyRequest jobFamilyRequest) throws SQLException {
-        Connection c = databaseConnector.getConnection();
+    public int createJobFamiliy(JobFamilyRequest jobFamilyRequest, Connection c) throws SQLException {
         String insertStatment = "INSERT INTO  JobFamily (JobFamily,RoleName) VALUES(?,?)";
         PreparedStatement st = c.prepareStatement(insertStatment, Statement.RETURN_GENERATED_KEYS);
 
         st.setString(1, jobFamilyRequest.getJobFamily());
         st.setString(2, jobFamilyRequest.getRoleName());
+        int affectedRows = st.executeUpdate();
+        if (affectedRows == 0) {
+            throw new SQLException("Creating user failed, no rows affected.");
+        }
+        int empNo = 0;
 
-        st.executeUpdate();
+        try (ResultSet rs = st.getGeneratedKeys()) {
+            if (rs.next()) {
+                empNo = rs.getInt(1);
+            }
+        }
 
+        return empNo;
 
-        return 0;
     }
 }
