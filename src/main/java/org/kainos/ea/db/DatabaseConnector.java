@@ -1,10 +1,8 @@
 package org.kainos.ea.db;
 
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DatabaseConnector {
 
@@ -45,7 +43,8 @@ public class DatabaseConnector {
             if (!props.isValid()) {
                 throw new IllegalArgumentException(
                         "Environment variables must be set for "
-                                + "DB_USERNAME, DB_PASSWORD, DB_HOST, and DB_NAME."
+                                + "DB_USERNAME, DB_PASSWORD, "
+                                + "DB_HOST, and DB_NAME."
                 );
             }
 

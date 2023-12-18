@@ -22,11 +22,10 @@ public class RoleServiceTests {
     private final DatabaseConnector databaseConnector = mock(
             DatabaseConnector.class);
     private final RoleDao roleDao = mock(RoleDao.class);
+    private final Connection c = mock(Connection.class);
+
     private final RoleService roleService = new RoleService(
-            roleDao, new DatabaseConnector());
-
-    private Connection c;
-
+            roleDao, databaseConnector);
     @Test
     public void getRolesShouldReturnRolesWhenDaoReturnsRoles() throws
             SQLException, FailedToGetRolesException {
