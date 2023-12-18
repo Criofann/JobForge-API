@@ -54,7 +54,6 @@ public class RoleService {
        try {
            Boolean validation = jobValidator.isValidJob(jobRequest);
 
-
            int id;
            try {
                id = roleDao.createJob(jobRequest, databaseConnector.getConnection());

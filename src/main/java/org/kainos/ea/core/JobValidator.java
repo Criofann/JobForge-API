@@ -27,7 +27,6 @@ public class JobValidator {
 
             throw new NotURLException();
         }
-        System.out.println("mock validator not working");
         return true;
     }
 

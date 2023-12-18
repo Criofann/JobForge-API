@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.kainos.ea.JobForgeWebServiceApplication;
 import org.kainos.ea.JobForgeWebServiceConfiguration;
 
 import org.kainos.ea.cli.JobRequest;
@@ -21,13 +22,14 @@ import javax.ws.rs.core.Response;
 public class RoleServiceTest {
 
     static final DropwizardAppExtension<JobForgeWebServiceConfiguration> APP = new DropwizardAppExtension<>(
-            JobForgeWebServiceConfiguration.class, null,
+            JobForgeWebServiceApplication.class, null,
             new ResourceConfigurationSourceProvider()
     );
     @Test
     void postEmployee_shouldReturnError400WithTooLongName() {
+
         JobRequest jobRequest = new JobRequest(
-                "Software engineer names is extended to be to long",
+                "Software engineer names is extended to be to long2",
                 "The specification sumarry",
                 "Enginering",
                 "band1",
@@ -126,11 +128,13 @@ public class RoleServiceTest {
     }
 
     @Test
-    void postEmployee_shouldReturnIdOfEmployee() {
+    void postRole_shouldReturnIdOfEmployee() {
+        // if data is already in the database this will fail because of primary key constraints change
+        // data or delete the data form the dataBase
         JobRequest jobRequest = new JobRequest(
-                "Software engineer names is extended to be to long",
+                "Software engineer34",
                 "The specification sumarry",
-                "Enginering",
+                "Engineering",
                 "band1",
                 "put some responsibilities here",
                 "https://kainossoftwareltd.sharepoint.com/SitePages/Home.aspx"
