@@ -19,7 +19,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
-@Api("JobForge Dropwizard API")
 @Path("/api")
 public class RoleController {
 
@@ -38,7 +37,7 @@ public class RoleController {
 
 
     @GET
-    @Path("/job-roles")
+    @Path("/roles")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRoles() {
         try {

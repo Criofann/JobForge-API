@@ -35,4 +35,5 @@ public class JobForgeWebServiceApplication
                     final Environment environment) {
         environment.jersey().register(new RoleController());
     }
+
 }
