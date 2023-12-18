@@ -9,11 +9,13 @@ import org.kainos.ea.client.InvalidRoleException;
 import org.kainos.ea.client.RoleDoesNotExistException;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
-
-import javax.ws.rs.*;
+import javax.ws.rs.Path;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.crypto.Data;
 
 @Api("JobForge Dropwizard API")
 @Path("/api")
@@ -60,7 +62,8 @@ public class RoleController {
     @PUT
     @Path("/update-roles/{RoleName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateRole(@PathParam("RoleName") String roleName, RoleRequest role) {
+    public Response updateRole(@PathParam("RoleName") String roleName,
+                               RoleRequest role) {
         try {
             roleService.updateRole(roleName, role);
 
@@ -68,7 +71,8 @@ public class RoleController {
         } catch (InvalidRoleException | RoleDoesNotExistException e) {
             System.err.println(e.getMessage());
 
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(
+                    e.getMessage()).build();
         } catch (FailedToUpdateRoleException e) {
             System.err.println(e.getMessage());
 

@@ -1,37 +1,37 @@
 package org.kainos.ea.cli;
 
 public class Band {
-    private String BandName;
-    private String BandLevel;
-    private String Competencies;
+    private String bandName;
+    private String bandLevel;
+    private String competencies;
 
     public String getBandName() {
-        return BandName;
+        return bandName;
     }
 
     public void setBandName(String bandName) {
-        BandName = bandName;
+        this.bandName = bandName;
     }
 
     public String getBandLevel() {
-        return BandLevel;
+        return bandLevel;
     }
 
     public void setBandLevel(String bandLevel) {
-        BandLevel = bandLevel;
+        this.bandLevel = bandLevel;
     }
 
     public String getCompetencies() {
-        return Competencies;
+        return competencies;
     }
 
     public void setCompetencies(String competencies) {
-        Competencies = competencies;
+        this.competencies = competencies;
     }
 
-    public Band(String BandName, String BandLevel, String Competencies) {
-        this.BandName = BandName;
-        this.BandLevel = BandLevel;
-        this.Competencies = Competencies;
+    public Band(String bandName, String bandLevel, String competencies) {
+        this.bandName = bandName;
+        this.bandLevel = bandLevel;
+        this.competencies = competencies;
     }
 }

@@ -30,7 +30,8 @@ public class RoleService {
         return databaseConnector;
     }
 
-    public List<Role> getRoles(DatabaseConnector connector) throws FailedToGetRolesException {
+    public List<Role> getRoles(DatabaseConnector connector)
+            throws FailedToGetRolesException {
         List<Role> roleList;
         try {
             roleList = roleDao.getRoles(connector.getConnection());
@@ -42,7 +43,8 @@ public class RoleService {
         return roleList;
     }
 
-    public Role getRoleByID(String roleName) throws FailedToGetRolesException, RoleDoesNotExistException {
+    public Role getRoleByID(String roleName)
+            throws FailedToGetRolesException, RoleDoesNotExistException {
         try {
             Role role = roleDao.getRoleByID(roleName);
             if (role == null) {
@@ -56,7 +58,9 @@ public class RoleService {
         }
     }
 
-    public void updateRole(String roleName, RoleRequest role) throws InvalidRoleException, RoleDoesNotExistException, FailedToUpdateRoleException {
+    public void updateRole(String roleName, RoleRequest role)
+            throws InvalidRoleException, RoleDoesNotExistException,
+            FailedToUpdateRoleException {
         try {
             String validation = RoleValidator.isValidRole(role);
 

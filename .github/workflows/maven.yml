@@ -26,3 +26,6 @@ jobs:
 
       - name: Run linter
         run: mvn checkstyle:check
+
+      - name: Run Tests
+        run: mvn clean test

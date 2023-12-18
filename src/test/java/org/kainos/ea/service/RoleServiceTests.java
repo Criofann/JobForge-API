@@ -1,38 +1,35 @@
-package org.kainos.ea.api;
+package org.kainos.ea.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.kainos.ea.api.RoleService;
 import org.kainos.ea.cli.Role;
 import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class RoleServiceTests {
 
-    DatabaseConnector databaseConnector = mock(DatabaseConnector.class);
-    RoleDao roleDao = mock(RoleDao.class);
-    RoleService roleService = new RoleService(roleDao, new DatabaseConnector());
+    private final DatabaseConnector databaseConnector = mock(
+            DatabaseConnector.class);
+    private final RoleDao roleDao = mock(RoleDao.class);
+    private final RoleService roleService = new RoleService(
+            roleDao, new DatabaseConnector());
 
-    Connection c;
-
-    //private RoleService roleService = new RoleService(roleDao, databaseConnector);
+    private Connection c;
 
     @Test
-    public void getRoles_ShouldReturnRoles_WhenDaoReturnsRoles() throws SQLException, FailedToGetRolesException{
+    public void getRolesShouldReturnRolesWhenDaoReturnsRoles() throws
+            SQLException, FailedToGetRolesException {
 
         List<Role> roles = Arrays.asList(
                 mock(Role.class)

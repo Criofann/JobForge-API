@@ -10,16 +10,17 @@ import java.util.List;
 
 public class BandDao {
 
-    DatabaseConnector databaseConnector = new DatabaseConnector();
+    private DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Band> getBands() throws SQLException {
         Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("SELECT BandName, BandLevel, Competencies FROM `Band`;");
+        ResultSet rs = st.executeQuery("SELECT BandName, "
+                + "BandLevel, Competencies FROM `Band`;");
 
         List<Band> bandList = new ArrayList<>();
 
-        while (rs.next()){
+        while (rs.next()) {
             Band bands = new Band(
                     rs.getString("BandName"),
                     rs.getString("BandLevel"),

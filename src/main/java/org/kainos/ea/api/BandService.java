@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class BandService {
-    BandDao bandDao = new BandDao();
+    private BandDao bandDao = new BandDao();
     public List<Band> getBands() throws FailedToGetBandsException {
         List<Band> bandList;
         try {
