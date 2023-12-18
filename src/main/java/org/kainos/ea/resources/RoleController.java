@@ -20,9 +20,7 @@ import javax.ws.rs.core.Response;
 @Api("JobForge Dropwizard API")
 @Path("/api")
 public class RoleController {
-
     private static RoleService roleService;
-    private DatabaseConnector databaseConnector;
 
     public RoleController() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
@@ -35,7 +33,7 @@ public class RoleController {
     public Response getRoles() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         try {
-            return Response.ok(roleService.getRoles(databaseConnector)).build();
+            return Response.ok(roleService.getRoles()).build();
         } catch (FailedToGetRolesException e) {
             System.err.println(e.getMessage());
 

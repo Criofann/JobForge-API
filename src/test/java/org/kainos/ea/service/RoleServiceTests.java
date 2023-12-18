@@ -38,6 +38,6 @@ public class RoleServiceTests {
         when(databaseConnector.getConnection()).thenReturn(c);
         when(roleDao.getRoles(c)).thenReturn(roles);
 
-        assertEquals(roles, roleService.getRoles(databaseConnector));
+        assertEquals(roles, roleService.getRoles());
     }
 }

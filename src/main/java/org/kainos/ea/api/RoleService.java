@@ -14,27 +14,19 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RoleService {
-    private RoleDao roleDao;
-    private DatabaseConnector databaseConnector;
+    private final RoleDao roleDao;
+    private final DatabaseConnector databaseConnector;
 
     public RoleService(RoleDao roleDao, DatabaseConnector databaseConnector) {
         this.roleDao = roleDao;
         this.databaseConnector = databaseConnector;
     }
 
-    public RoleDao getJobRolesDao() {
-        return roleDao;
-    }
-
-    public DatabaseConnector getDatabaseConnector() {
-        return databaseConnector;
-    }
-
-    public List<Role> getRoles(DatabaseConnector connector)
+    public List<Role> getRoles()
             throws FailedToGetRolesException {
         List<Role> roleList;
         try {
-            roleList = roleDao.getRoles(connector.getConnection());
+            roleList = roleDao.getRoles(databaseConnector.getConnection());
 
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
