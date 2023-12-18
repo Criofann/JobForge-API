@@ -4,7 +4,6 @@ import org.kainos.ea.cli.BandRole;
 import org.kainos.ea.cli.Role;
 import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.db.BandRoleDAO;
-import org.kainos.ea.db.RoleDao;
 
 import java.sql.SQLException;
 import java.util.List;
