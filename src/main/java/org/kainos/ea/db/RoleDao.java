@@ -1,5 +1,6 @@
 package org.kainos.ea.db;
 
+
 import org.kainos.ea.cli.JobFamilyRequest;
 import org.kainos.ea.cli.JobRequest;
 import org.kainos.ea.cli.Role;
@@ -10,11 +11,13 @@ import java.util.List;
 
 public class RoleDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
-    public List<Role> getRoles(Connection conn) throws SQLException {
-        Connection c = databaseConnector.getConnection();
 
-        Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("SELECT RoleName, Specification, Responsibilities, SharepointLink FROM `JobRole`;");
+    public List<Role> getRoles(Connection con) throws SQLException {
+
+
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery("SELECT RoleName, Specification, "
+                + "Responsibilities, SharepointLink FROM `JobRole`;");
 
         List<Role> roleList = new ArrayList<>();
 
@@ -29,6 +32,7 @@ public class RoleDao {
         }
         return roleList;
     }
+
 
     public int createJob(JobRequest jobRequest, Connection conn) throws SQLException {
         Connection c =  conn;
@@ -69,3 +73,5 @@ public class RoleDao {
 
     }
 }
+
+

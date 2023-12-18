@@ -20,14 +20,17 @@ public class JobForgeWebServiceApplication
     }
 
     @Override
-    public void initialize(
-            final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
-        bootstrap.addBundle(new SwaggerBundle<JobForgeWebServiceConfiguration>(){
-            @Override
-            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(JobForgeWebServiceConfiguration configuration){
-                return configuration.getSwagger();
-            }
-        });
+    public void
+    initialize(final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
+        bootstrap.addBundle(
+                new SwaggerBundle<JobForgeWebServiceConfiguration>() {
+                    @Override
+                    protected SwaggerBundleConfiguration
+                    getSwaggerBundleConfiguration(
+                            JobForgeWebServiceConfiguration configuration) {
+                        return configuration.getSwagger();
+                    }
+                });
     }
 
     @Override
@@ -35,5 +38,4 @@ public class JobForgeWebServiceApplication
                     final Environment environment) {
         environment.jersey().register(new RoleController());
     }
-
 }

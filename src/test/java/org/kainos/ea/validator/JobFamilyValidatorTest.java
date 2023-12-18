@@ -6,8 +6,7 @@ import org.kainos.ea.cli.JobRequest;
 import org.kainos.ea.client.*;
 import org.kainos.ea.core.JobFamilyValidator;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JobFamilyValidatorTest {
     JobFamilyValidator jobFamilyValidator = new JobFamilyValidator();
@@ -18,7 +17,7 @@ public class JobFamilyValidatorTest {
                 "engineering"
         );
 
-        assertNull(jobFamilyValidator.isValidJobFamily(jobFamilyRequest));
+        assertTrue(jobFamilyValidator.isValidJobFamily(jobFamilyRequest));
     }
     @Test
     public void isValidJob_shouldThrowRole_whenValidEmployee() {

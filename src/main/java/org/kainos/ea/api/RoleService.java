@@ -50,6 +50,7 @@ public class RoleService {
 
         return roleList;
     }
+
     public int createJob(JobRequest jobRequest) throws FailedToCreateJobException, SQLException, InvalidJobException {
        try {
            Boolean validation = jobValidator.isValidJob(jobRequest);
@@ -68,7 +69,7 @@ public class RoleService {
     }
 
     public int createJobFamily(JobFamilyRequest jobFamilyRequest)
-            throws FailedToCreateJobFamilyException, InvalidJobFamilyException {
+            throws FailedToCreateJobFamilyException, InvalidJobFamilyException, SQLException {
 
     try {
         Boolean validation = jobFamilyValidator.isValidJobFamily(jobFamilyRequest);
@@ -78,10 +79,11 @@ public class RoleService {
         return id;
     } catch (SQLException e) {
         System.err.println(e.getMessage());
-        throw new FailedToCreateJobFamilyException();
+        throw new SQLException();
     } catch (JobNameTooLongException | JobFamilyTooLongException e) {
         throw new RuntimeException(e);
     }
 
     }
+
 }
