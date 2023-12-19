@@ -29,8 +29,8 @@ public class FamilyServiceTest {
         // will fail because of primary key constraints change
         // data or delete the data form the dataBase
         JobFamilyRequest jobFamilyRequest = new JobFamilyRequest(
-                "Software engineer39",
-                "Jpb Family"
+                "Software engineer",
+                "Jpb Family6"
 
         );
 
