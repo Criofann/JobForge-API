@@ -154,7 +154,7 @@ public class RoleServiceTest {
         // because of primary key constraints change
         // data or delete the data form the dataBase
         JobRequest jobRequest = new JobRequest(
-                "Software engineer398",
+                "deleteme",
                 "The specification sumarry",
                 "Engineering",
                 "band1",

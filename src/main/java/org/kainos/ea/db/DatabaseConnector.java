@@ -1,10 +1,7 @@
 package org.kainos.ea.db;
-
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DatabaseConnector {
     public static final String ENV_DB_USERNAME = "DB_USERNAME";

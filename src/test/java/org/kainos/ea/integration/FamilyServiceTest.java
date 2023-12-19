@@ -9,8 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.JobForgeWebServiceApplication;
 import org.kainos.ea.JobForgeWebServiceConfiguration;
 import org.kainos.ea.cli.JobFamilyRequest;
-import org.kainos.ea.cli.JobRequest;
-
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -30,7 +28,7 @@ public class FamilyServiceTest {
         // data or delete the data form the dataBase
         JobFamilyRequest jobFamilyRequest = new JobFamilyRequest(
                 "Software engineer",
-                "Job Family899"
+                "deleteme"
 
         );
 
