@@ -69,11 +69,11 @@ public class JobRequest {
             @JsonProperty("capabilityName") String capabilityName,
             @JsonProperty("bandName") String bandName,
             @JsonProperty("responsibilities") String responsibilities,
-            @JsonProperty("sharepointLink") String sharepointLink){
-                this.roleName =roleName;
-                this.specification =specification;
+            @JsonProperty("sharepointLink") String sharepointLink) {
+                this.roleName = roleName;
+                this.specification = specification;
                 this.capabilityName = capabilityName;
-                this.bandName =bandName;
+                this.bandName = bandName;
                 this.responsibilities = responsibilities;
                 this.sharepointLink = sharepointLink;
             }

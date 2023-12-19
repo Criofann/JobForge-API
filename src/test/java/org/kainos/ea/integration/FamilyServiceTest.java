@@ -17,50 +17,60 @@ import javax.ws.rs.core.Response;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class FamilyServiceTest {
-    static final DropwizardAppExtension<JobForgeWebServiceConfiguration> APP = new DropwizardAppExtension<>(
+    static final DropwizardAppExtension<JobForgeWebServiceConfiguration> APP
+            = new DropwizardAppExtension<>(
             JobForgeWebServiceApplication.class, null,
             new ResourceConfigurationSourceProvider()
     );
+
     @Test
-    void postFamily_shouldReturnIdOfEmployee() {
-        // if data is already in the database this will fail because of primary key constraints change
+    void postFamilyShouldReturnIdOfEmployee() {
+        // if data is already in the database this
+        // will fail because of primary key constraints change
         // data or delete the data form the dataBase
         JobFamilyRequest jobFamilyRequest = new JobFamilyRequest(
-                "Software engineer34",
+                "Software engineer39",
                 "Jpb Family"
 
         );
 
-        int id = APP.client().target("http://localhost:8080/api/job-family")
+        int id = APP.client().target(
+                        "http://localhost:8080/api/job-family")
                 .request()
-                .post(Entity.entity(jobFamilyRequest, MediaType.APPLICATION_JSON_TYPE))
+                .post(Entity.entity(jobFamilyRequest,
+                        MediaType.APPLICATION_JSON_TYPE))
                 .readEntity(Integer.class);
 
         Assertions.assertNotNull(id);
     }
+
     @Test
-    void postFamily_shouldReturnError400WithTooLongName() {
+    void postFamilyShouldReturnError400WithTooLongName() {
 
         JobFamilyRequest jobFamilyRequest = new JobFamilyRequest(
                 "Software engineer names is extended to be to long",
                 "job family"
         );
-        Response response = APP.client().target("http://localhost:8080/api/job-family")
+        Response response = APP.client().target(
+                        "http://localhost:8080/api/job-family")
                 .request()
-                .post(Entity.entity(jobFamilyRequest, MediaType.APPLICATION_JSON_TYPE));
+                .post(Entity.entity(jobFamilyRequest,
+                        MediaType.APPLICATION_JSON_TYPE));
         Assertions.assertEquals(400, response.getStatus());
     }
+
     @Test
-    void postFamily_shouldReturnError400WithTooLongFamily() {
-
+    void postFamilyShouldReturnError400WithTooLongFamily() {
         JobFamilyRequest jobFamilyRequest = new JobFamilyRequest(
-                "Software engineer12",
-                "job family is limited in length to 20 characters "
+                "Software engineer",
+                "job family is too long"
         );
-        Response response = APP.client().target("http://localhost:8080/api/job-family")
+        System.out.println(jobFamilyRequest.getJobFamily());
+        Response response = APP.client().target(
+                        "http://localhost:8080/api/job-family")
                 .request()
-                .post(Entity.entity(jobFamilyRequest, MediaType.APPLICATION_JSON_TYPE));
+                .post(Entity.entity(jobFamilyRequest,
+                        MediaType.APPLICATION_JSON_TYPE));
         Assertions.assertEquals(400, response.getStatus());
     }
-
 }
