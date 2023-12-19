@@ -31,7 +31,6 @@ public class RoleController {
     @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRoles() {
-        DatabaseConnector databaseConnector = new DatabaseConnector();
         try {
             return Response.ok(roleService.getRoles()).build();
         } catch (FailedToGetRolesException e) {

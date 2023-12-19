@@ -14,7 +14,6 @@ import org.kainos.ea.cli.RoleRequest;
 public class RoleDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Role> getRoles(Connection conn) throws SQLException {
-        //Connection c = conn.getConnection();
 
         Statement st = conn.createStatement();
 
