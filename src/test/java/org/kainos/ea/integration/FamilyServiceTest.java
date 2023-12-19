@@ -30,7 +30,7 @@ public class FamilyServiceTest {
         // data or delete the data form the dataBase
         JobFamilyRequest jobFamilyRequest = new JobFamilyRequest(
                 "Software engineer",
-                "Jpb Family6"
+                "Job Family899"
 
         );
 

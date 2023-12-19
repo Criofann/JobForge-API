@@ -34,13 +34,6 @@ public class RoleService {
         this.databaseConnector = databaseConnector;
     }
 
-    public RoleDao getJobRolesDao() {
-        return roleDao;
-    }
-
-    public DatabaseConnector getDatabaseConnector() {
-        return databaseConnector;
-    }
 
     private JobValidator jobValidator = new JobValidator();
     private JobFamilyValidator jobFamilyValidator = new JobFamilyValidator();
@@ -52,8 +45,9 @@ public class RoleService {
             throws FailedToGetRolesException {
         List<Role> roleList;
         try {
+            System.out.println("here");
             roleList = roleDao.getRoles(connector.getConnection());
-
+            System.out.println("passed roleDAO");
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
         }
