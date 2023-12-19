@@ -45,9 +45,7 @@ public class RoleService {
             throws FailedToGetRolesException {
         List<Role> roleList;
         try {
-            System.out.println("here");
             roleList = roleDao.getRoles(connector.getConnection());
-            System.out.println("passed roleDAO");
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
         }

@@ -24,7 +24,6 @@ public class DatabaseConnector {
     }
     public Connection getConnection(DatabaseProperties props)
             throws SQLException {
-        System.out.println("database");
         return DriverManager.getConnection(
                 "jdbc:mysql://" + props.getHost() + "/" + props.getName()
                         + "?useSSL=false",
@@ -33,7 +32,6 @@ public class DatabaseConnector {
 
     public Connection getConnection()
             throws SQLException {
-        System.out.println("other database");
         if (DatabaseConnector.connection != null
                 && !DatabaseConnector.connection.isClosed()) {
             return DatabaseConnector.connection;
