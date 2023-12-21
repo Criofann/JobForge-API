@@ -61,7 +61,6 @@ public class RoleService {
                        databaseConnector.getConnection());
                return id;
            } catch (SQLException e) {
-               System.out.println("here");
                throw new SQLException();
            }
 
