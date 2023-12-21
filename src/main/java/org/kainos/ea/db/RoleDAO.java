@@ -15,7 +15,9 @@ public class RoleDAO {
 
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(
-                "SELECT RoleName, Specification, Responsibilities, SharepointLink FROM `JobRole`;");
+                "SELECT RoleName, Specification, \n"
+                     + "Responsibilities, SharepointLink \n"
+                     + "FROM `JobRole`;");
 
         List<Role> roleList = new ArrayList<>();
 

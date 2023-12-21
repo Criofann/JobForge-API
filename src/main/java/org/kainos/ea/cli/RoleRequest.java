@@ -60,7 +60,7 @@ public class RoleRequest {
     }
 
     @JsonCreator
-    public RoleRequest (
+    public RoleRequest(
             @JsonProperty("RoleName") String roleName,
             @JsonProperty("Specification") String specification,
             @JsonProperty("CapabilityName") String capabilityName,

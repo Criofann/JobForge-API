@@ -21,16 +21,15 @@ public class JobForgeWebServiceApplication
     }
 
     @Override
-    public void initialize (
+    public void initialize(
             final Bootstrap
                     <JobForgeWebServiceConfiguration> bootstrap) {
         bootstrap.addBundle(
                 new SwaggerBundle<JobForgeWebServiceConfiguration>() {
             @Override
             protected SwaggerBundleConfiguration
-            getSwaggerBundleConfiguration (
-                    JobForgeWebServiceConfiguration configuration
-            ) {
+            getSwaggerBundleConfiguration(
+                    JobForgeWebServiceConfiguration configuration) {
                 return configuration.getSwagger();
             }
         });

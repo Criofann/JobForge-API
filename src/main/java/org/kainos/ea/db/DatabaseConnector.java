@@ -13,9 +13,10 @@ public class DatabaseConnector {
     public static Connection getConnection() throws SQLException {
         String user, password, host, name;
 
-        if (conn != null && !conn.isClosed()) { return conn;}
+        if (conn != null && !conn.isClosed()) {
+            return conn; }
 
-        try(FileInputStream propsStream =
+        try (FileInputStream propsStream =
                     new FileInputStream("db.properties")) {
 
             Properties props = new Properties();
@@ -26,12 +27,15 @@ public class DatabaseConnector {
             host = props.getProperty("host");
             name = props.getProperty("name");
 
-            if (user == null || password == null || host == null)
-                throw new IllegalArgumentException("Properties file must exist "+
-                        "and must contain user, password, name and host properties.");
+            if (user == null || password == null
+                    || host == null)
+                throw new IllegalArgumentException("Properties file \n "
+                        + "must exist and must contain user, \n "
+                        + "password, name and host properties.");
 
-            conn = DriverManager.getConnection (
-                    "jdbc:mysql://" + host + "/" + name + "?useSSL=false", user, password);
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://" + host + "/ \n"
+                            + name + "?useSSL=false", user, password);
             return conn;
 
 

@@ -14,14 +14,16 @@ public class BandRoleDAO {
         Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery
-                ("SELECT JobRole.RoleName, JobRole.Specification, JobRole.Responsibilities, \n" +
-                "JobRole.SharepointLink, JobRole.BandLevel Band.BandLevel FROM JobRole\n" +
-                "JOIN Band ON JobRole.BandName = Band.BandName;");
+        ResultSet rs = st.executeQuery(
+                "SELECT JobRole.RoleName, JobRole.Specification,"
+                    + " JobRole.Responsibilities, \n"
+                    + "JobRole.SharepointLink, JobRole.BandLevel,\n"
+                    + " Band.BandLevel FROM JobRole\n"
+                    + "JOIN Band ON JobRole.BandName = Band.BandName;");
 
         List<BandRole> bandRoleList = new ArrayList<>();
 
-        while (rs.next()){
+        while (rs.next()) {
             BandRole bandRole = new BandRole(
                     rs.getString("RoleName"),
                     rs.getString("Specification"),

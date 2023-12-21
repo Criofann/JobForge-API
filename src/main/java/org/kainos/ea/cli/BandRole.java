@@ -47,8 +47,12 @@ public class BandRole {
         this.bandLevel = bandLevel;
     }
 
-    public BandRole(String roleName, String specification,
-                    String responsibilities, String sharepointLink, String bandLevel) {
+    public BandRole(String roleName,
+                    String specification,
+                    String responsibilities,
+                    String sharepointLink,
+                    String bandLevel) {
+
         this.roleName = roleName;
         this.specification = specification;
         this.responsibilities = responsibilities;

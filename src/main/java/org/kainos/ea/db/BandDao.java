@@ -34,9 +34,10 @@ public class BandDao {
         Statement statement = connection.createStatement();
 
         ResultSet resultSet = statement.executeQuery(
-                "SELECT JobRole.RoleName, Band.BandLevel, Band.Competencies " +
-                    "FROM JobRole JOIN Band ON JobRole.BandName ="
-                    + " Band.BandName WHERE JobRole.RoleName = '" + roleName + "'");
+                "SELECT JobRole.RoleName, Band.BandLevel, Band.Competencies \n"
+                    + "FROM JobRole JOIN Band ON JobRole.BandName = \n"
+                    + " Band.BandName WHERE JobRole.RoleName = \n'"
+                    + roleName + "'");
 
         while (resultSet.next()) {
              return new Band(
