@@ -13,11 +13,12 @@ public class BandDao {
         Connection c = DatabaseConnector.getConnection();
 
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("SELECT BandName, BandLevel, Competencies FROM `Band`;");
+        ResultSet rs = st.executeQuery(
+                "SELECT BandName, BandLevel, Competencies FROM `Band`;");
 
         List<Band> bandList = new ArrayList<>();
 
-        while (rs.next()){
+        while (rs.next()) {
             Band bands = new Band(
                     rs.getString("BandName"),
                     rs.getString("BandLevel"),
@@ -32,8 +33,10 @@ public class BandDao {
 
         Statement statement = connection.createStatement();
 
-        ResultSet resultSet = statement.executeQuery("SELECT JobRole.RoleName, Band.BandLevel, Band.Competencies " +
-                    "FROM JobRole JOIN Band ON JobRole.BandName = Band.BandName WHERE JobRole.RoleName = '" + roleName + "'");
+        ResultSet resultSet = statement.executeQuery(
+                "SELECT JobRole.RoleName, Band.BandLevel, Band.Competencies " +
+                    "FROM JobRole JOIN Band ON JobRole.BandName ="
+                    + " Band.BandName WHERE JobRole.RoleName = '" + roleName + "'");
 
         while (resultSet.next()) {
              return new Band(

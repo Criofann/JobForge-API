@@ -1,47 +1,48 @@
 package org.kainos.ea.cli;
 
 public class Role {
-    private String RoleName;
-    private String Specification;
-    private String Responsibilities;
-    private String SharepointLink;
+    private String roleName;
+    private String specification;
+    private String responsibilities;
+    private String sharepointLink;
 
     public String getRoleName() {
-        return RoleName;
+        return roleName;
     }
 
     public void setRoleName(String roleName) {
-        RoleName = roleName;
+        this.roleName = roleName;
     }
 
     public String getSpecification() {
-        return Specification;
+        return specification;
     }
 
     public void setSpecification(String specification) {
-        Specification = specification;
+        this.specification = specification;
     }
 
     public String getResponsibilities() {
-        return Responsibilities;
+        return responsibilities;
     }
 
     public void setResponsibilities(String responsibilities) {
-        Responsibilities = responsibilities;
+        this.responsibilities = responsibilities;
     }
 
     public String getSharepointLink() {
-        return SharepointLink;
+        return sharepointLink;
     }
 
     public void setSharepointLink(String sharepointLink) {
-        SharepointLink = sharepointLink;
+        this.sharepointLink = sharepointLink;
     }
 
-    public Role(String RoleName, String Specification, String Responsibilities, String SharepointLink) {
-        this.RoleName = RoleName;
-        this.Specification = Specification;
-        this.Responsibilities = Responsibilities;
-        this.SharepointLink = SharepointLink;
+    public Role (String roleName, String specification,
+                 String responsibilities, String sharepointLink) {
+        this.roleName = roleName;
+        this.specification = specification;
+        this.responsibilities = responsibilities;
+        this.sharepointLink = sharepointLink;
     }
 }

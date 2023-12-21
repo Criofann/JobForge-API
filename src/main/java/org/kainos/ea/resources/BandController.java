@@ -31,9 +31,11 @@ public class BandController {
     @GET
     @Path("/band/{roleName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBandByJobRole(@PathParam("roleName")String roleName) {
+    public Response getBandByJobRole
+            (@PathParam("roleName")String roleName) {
         try {
-            return Response.ok(bandService.getBandByJobRole(roleName)).build();
+            return Response.ok
+                    (bandService.getBandByJobRole(roleName)).build();
         } catch (FailedToGetBandsException e) {
             System.err.println(e.getMessage());
 
@@ -41,7 +43,8 @@ public class BandController {
         } catch (BandDoesNotExistException e) {
             System.err.println(e.getMessage());
 
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status
+                    (Response.Status.BAD_REQUEST).build();
         }
     }
 }

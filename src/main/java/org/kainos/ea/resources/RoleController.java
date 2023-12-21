@@ -4,7 +4,9 @@ import io.swagger.annotations.Api;
 import org.kainos.ea.api.BandRoleService;
 import org.kainos.ea.api.RoleService;
 import org.kainos.ea.client.FailedToGetRolesException;
-import javax.ws.rs.*;
+import javax.ws.rs.Path;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 

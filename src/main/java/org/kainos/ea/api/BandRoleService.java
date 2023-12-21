@@ -1,7 +1,6 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.cli.BandRole;
-import org.kainos.ea.cli.Role;
 import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.db.BandRoleDAO;
 

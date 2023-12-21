@@ -20,7 +20,8 @@ public class BandService {
 
         return bandList;
     }
-    public Band getBandByJobRole(String roleName) throws FailedToGetBandsException, BandDoesNotExistException {
+    public Band getBandByJobRole(String roleName)
+            throws FailedToGetBandsException, BandDoesNotExistException {
         try {
             Band band = bandDao.getBandByJobRole(roleName);
             if (band == null) {
