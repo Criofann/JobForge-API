@@ -18,11 +18,9 @@ public class RoleDao {
 
     public List<Role> getRoles(Connection con) throws SQLException {
 
-        System.out.println("in role Dao");
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery("SELECT RoleName, Specification, "
                 + "Responsibilities, SharepointLink FROM `JobRole`;");
-        System.out.println("dataBase qurry");
         List<Role> roleList = new ArrayList<>();
 
         while (rs.next()) {
