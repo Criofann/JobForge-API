@@ -3,17 +3,13 @@ package org.kainos.ea.service;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.api.RoleService;
-import org.kainos.ea.cli.JobFamilyRequest;
 import org.kainos.ea.cli.JobRequest;
 import org.kainos.ea.client.FailedToCreateJobException;
-import org.kainos.ea.client.InvalidJobFamilyException;
 import org.kainos.ea.client.NotURLException;
 import org.kainos.ea.client.JobCapabilityTooLongException;
 import org.kainos.ea.client.JobSpecTooLongException;
 import org.kainos.ea.client.JobNameTooLongException;
 import org.kainos.ea.client.JobBandTooLongException;
-import org.kainos.ea.client.FailedToCreateJobFamilyException;
-import org.kainos.ea.client.JobFamilyTooLongException;
 import org.kainos.ea.client.InvalidJobException;
 import org.kainos.ea.client.ResponsibilityTooLongException;
 import org.kainos.ea.core.JobFamilyValidator;
@@ -43,6 +39,7 @@ public class RoleServiceTest {
 
     private final JobRequest jobRequest = new JobRequest(
             "Software engineer6",
+            "Job Family",
             "The specification sumarry",
             "engineering",
             "band1",
@@ -50,12 +47,8 @@ public class RoleServiceTest {
             "https://kainossoftwareltd.sharepoint.com/SitePages/Home.aspx"
 
     );
-    private final JobFamilyRequest jobFamilyRequest = new JobFamilyRequest(
-            "Software engineer",
-            "engineering"
-    );
-
     private Connection conn;
+
     @Test
     void createRoleShouldThrowSqlExceptionWhenDaoThrowsSqlException()
             throws SQLException, ResponsibilityTooLongException,
@@ -87,34 +80,6 @@ public class RoleServiceTest {
 
         assertEquals(result, expectedResult);
     }
-
-
-    @Test
-    void createFamilyShouldThrowSqlExceptionWhenDaoThrowsSqlException()
-            throws SQLException, JobNameTooLongException,
-            JobFamilyTooLongException {
-        Mockito.when(databaseConnector.getConnection())
-                .thenReturn(conn);
-        Mockito.when(jobFamilyValidator.isValidJobFamily(
-                jobFamilyRequest)).thenReturn(true);
-        Mockito.when(roleDao.createJobFamiliy(
-                jobFamilyRequest, conn)).thenThrow(SQLException.class);
-
-        assertThrows(SQLException.class,
-                () -> roleService.createJobFamily(jobFamilyRequest));
-    }
-
-    @Test
-    void createFamilyShouldReturnIdWhenDaoReturnsId()
-            throws SQLException,
-            InvalidJobFamilyException, FailedToCreateJobFamilyException {
-        int expectedResult = 0;
-        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(roleDao.createJobFamiliy(
-                jobFamilyRequest, conn)).thenReturn(expectedResult);
-
-        int result = roleService.createJobFamily(jobFamilyRequest);
-
-        assertEquals(result, expectedResult);
-    }
 }
+
+

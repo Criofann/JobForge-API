@@ -1,7 +1,6 @@
 package org.kainos.ea.validator;
 
 import org.junit.jupiter.api.Test;
-import org.kainos.ea.cli.JobFamilyRequest;
 
 import org.kainos.ea.core.JobFamilyValidator;
 import org.kainos.ea.client.JobNameTooLongException;

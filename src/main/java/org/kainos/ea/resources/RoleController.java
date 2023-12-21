@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 
 import org.eclipse.jetty.http.HttpStatus;
 import org.kainos.ea.api.RoleService;
-import org.kainos.ea.cli.JobFamilyRequest;
 import org.kainos.ea.cli.JobRequest;
 
 import org.kainos.ea.client.FailedToCreateJobException;
@@ -52,7 +51,6 @@ public class RoleController {
     }
 
 
-
     @GET
     @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,33 +93,4 @@ public class RoleController {
         }
     }
 
-    @POST
-    @Path("/job-family")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response createFamily(JobFamilyRequest jobFamilyRequest) {
-        try {
-            if (jobFamilyValidator.isValidJobFamily(jobFamilyRequest)) {
-                try {
-                    return Response.ok(
-                            roleService.createJobFamily(
-                                    jobFamilyRequest)).build();
-                } catch (FailedToCreateJobFamilyException e) {
-                    System.err.println(e.getMessage());
-                    return Response.serverError().build();
-                } catch (InvalidJobFamilyException e) {
-                    return Response.status(
-                            Response.Status.BAD_REQUEST).entity(
-                                    e.getMessage()).build();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-
-            } else {
-            return Response.status(HttpStatus.BAD_REQUEST_400).build();
-        }
-        } catch (JobNameTooLongException | JobFamilyTooLongException e) {
-            System.out.println(e);
-            return Response.status(HttpStatus.BAD_REQUEST_400).build();
-        }
-    }
 }

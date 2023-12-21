@@ -1,6 +1,5 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.JobFamilyRequest;
 import org.kainos.ea.cli.JobRequest;
 import org.kainos.ea.cli.Role;
 import org.kainos.ea.core.JobFamilyValidator;

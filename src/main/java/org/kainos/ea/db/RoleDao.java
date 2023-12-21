@@ -1,7 +1,6 @@
 package org.kainos.ea.db;
 
 
-import org.kainos.ea.cli.JobFamilyRequest;
 import org.kainos.ea.cli.JobRequest;
 import org.kainos.ea.cli.Role;
 
@@ -43,17 +42,18 @@ public class RoleDao {
             throws SQLException {
         Connection c =  conn;
         String insertStatment = "INSERT INTO  JobRole ("
-                + "RoleName, Specification, CapabilityName,"
+                + "RoleName, JobFamily, Specification, CapabilityName,"
                 + " Responsibilities, Sharepointlink )"
                 + " VALUES(?,?,?,?,?)";
         PreparedStatement st = c.prepareStatement(insertStatment,
                 Statement.RETURN_GENERATED_KEYS);
 
         st.setString(1, jobRequest.getRoleName());
-        st.setString(2, jobRequest.getSpecification());
-        st.setString(3, jobRequest.getCapabilityName());
-        st.setString(4, jobRequest.getResponsibilities());
-        st.setString(5, jobRequest.getSharepointLink());
+        st.setString(2, jobRequest.getJobFamily());
+        st.setString(3, jobRequest.getSpecification());
+        st.setString(4, jobRequest.getCapabilityName());
+        st.setString(5, jobRequest.getResponsibilities());
+        st.setString(6, jobRequest.getSharepointLink());
 
 
         st.executeUpdate();
@@ -61,30 +61,7 @@ public class RoleDao {
 
         return 0;
     }
-    public int createJobFamiliy(JobFamilyRequest jobFamilyRequest, Connection c)
-            throws SQLException {
-        String insertStatment = "INSERT INTO  JobFamily"
-                + " (JobFamily,RoleName) VALUES(?,?)";
-        PreparedStatement st = c.prepareStatement(
-                insertStatment, Statement.RETURN_GENERATED_KEYS);
 
-        st.setString(1, jobFamilyRequest.getJobFamily());
-        st.setString(2, jobFamilyRequest.getRoleName());
-        int affectedRows = st.executeUpdate();
-        if (affectedRows == 0) {
-            throw new SQLException("Creating user failed, no rows affected.");
-        }
-        int empNo = 0;
-
-        try (ResultSet rs = st.getGeneratedKeys()) {
-            if (rs.next()) {
-                empNo = rs.getInt(1);
-            }
-        }
-
-        return empNo;
-
-    }
 }
 
 

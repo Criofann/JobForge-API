@@ -1,6 +1,5 @@
 package org.kainos.ea.core;
 
-import org.kainos.ea.cli.JobFamilyRequest;
 import org.kainos.ea.client.JobFamilyTooLongException;
 import org.kainos.ea.client.JobNameTooLongException;
 
