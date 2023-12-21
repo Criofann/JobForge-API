@@ -1,7 +1,13 @@
 package org.kainos.ea.validator;
 
 import org.kainos.ea.cli.JobRequest;
-import org.kainos.ea.client.*;
+import org.kainos.ea.client.NotURLException;
+import org.kainos.ea.client.JobCapabilityTooLongException;
+import org.kainos.ea.client.JobSpecTooLongException;
+import org.kainos.ea.client.JobNameTooLongException;
+import org.kainos.ea.client.JobBandTooLongException;
+import org.kainos.ea.client.JobFamilyTooLongException;
+import org.kainos.ea.client.ResponsibilityTooLongException;
 import org.kainos.ea.core.JobValidator;
 
 import org.junit.jupiter.api.Test;

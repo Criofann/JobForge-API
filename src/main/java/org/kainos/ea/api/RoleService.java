@@ -7,13 +7,11 @@ import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
 import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.client.FailedToCreateJobException;
-import org.kainos.ea.client.InvalidJobFamilyException;
 import org.kainos.ea.client.NotURLException;
 import org.kainos.ea.client.JobCapabilityTooLongException;
 import org.kainos.ea.client.JobSpecTooLongException;
 import org.kainos.ea.client.JobNameTooLongException;
 import org.kainos.ea.client.JobBandTooLongException;
-import org.kainos.ea.client.FailedToCreateJobFamilyException;
 import org.kainos.ea.client.JobFamilyTooLongException;
 import org.kainos.ea.client.InvalidJobException;
 import org.kainos.ea.client.ResponsibilityTooLongException;
@@ -67,9 +65,10 @@ public class RoleService {
                throw new SQLException();
            }
 
-       } catch (JobNameTooLongException | JobSpecTooLongException | JobCapabilityTooLongException |
-                JobBandTooLongException | ResponsibilityTooLongException |
-                NotURLException | JobFamilyTooLongException e) {
+       } catch (JobNameTooLongException | JobSpecTooLongException
+                | JobCapabilityTooLongException
+                | JobBandTooLongException | ResponsibilityTooLongException
+                | NotURLException | JobFamilyTooLongException e) {
             throw new RuntimeException(e);
        }
     }
