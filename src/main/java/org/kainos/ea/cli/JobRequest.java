@@ -74,7 +74,7 @@ public class JobRequest {
     @JsonCreator
     public JobRequest(
             @JsonProperty("roleName") String roleName,
-            @JsonProperty("roleName") String jobFamily,
+            @JsonProperty("jobFamily") String jobFamily,
             @JsonProperty("specification") String specification,
             @JsonProperty("capabilityName") String capabilityName,
             @JsonProperty("bandName") String bandName,

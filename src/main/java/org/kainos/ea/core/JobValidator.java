@@ -1,12 +1,7 @@
 package org.kainos.ea.core;
 
 import org.kainos.ea.cli.JobRequest;
-import org.kainos.ea.client.JobBandTooLongException;
-import org.kainos.ea.client.JobNameTooLongException;
-import org.kainos.ea.client.JobSpecTooLongException;
-import org.kainos.ea.client.ResponsibilityTooLongException;
-import org.kainos.ea.client.NotURLException;
-import org.kainos.ea.client.JobCapabilityTooLongException;
+import org.kainos.ea.client.*;
 
 import java.net.URL;
 
@@ -14,11 +9,16 @@ public class JobValidator {
     public Boolean isValidJob(JobRequest jobRequest) throws
             JobNameTooLongException, JobSpecTooLongException,
             JobBandTooLongException, ResponsibilityTooLongException,
-            NotURLException, JobCapabilityTooLongException {
+            NotURLException, JobCapabilityTooLongException,
+            JobFamilyTooLongException {
         int nameLimit = 20;
         int specAndResLimit = 100;
         if (jobRequest.getRoleName().length() > nameLimit) {
             throw new JobNameTooLongException();
+        }
+        if (jobRequest.getJobFamily().length() > 20) {
+            System.out.println("job Family too long");
+            throw new JobFamilyTooLongException();
         }
         if (jobRequest.getSpecification().length() > specAndResLimit) {
             throw new JobSpecTooLongException();

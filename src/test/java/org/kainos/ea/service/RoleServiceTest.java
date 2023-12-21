@@ -4,15 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.api.RoleService;
 import org.kainos.ea.cli.JobRequest;
-import org.kainos.ea.client.FailedToCreateJobException;
-import org.kainos.ea.client.NotURLException;
-import org.kainos.ea.client.JobCapabilityTooLongException;
-import org.kainos.ea.client.JobSpecTooLongException;
-import org.kainos.ea.client.JobNameTooLongException;
-import org.kainos.ea.client.JobBandTooLongException;
-import org.kainos.ea.client.InvalidJobException;
-import org.kainos.ea.client.ResponsibilityTooLongException;
-import org.kainos.ea.core.JobFamilyValidator;
+import org.kainos.ea.client.*;
 import org.kainos.ea.core.JobValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
@@ -32,8 +24,7 @@ public class RoleServiceTest {
             = Mockito.mock(DatabaseConnector.class);
     private final JobValidator jobValidator
             = Mockito.mock(JobValidator.class);
-    private final JobFamilyValidator jobFamilyValidator
-            = Mockito.mock(JobFamilyValidator.class);
+
     private final RoleService roleService
             = new RoleService(roleDao, databaseConnector);
 
@@ -54,7 +45,8 @@ public class RoleServiceTest {
             throws SQLException, ResponsibilityTooLongException,
             NotURLException, JobSpecTooLongException,
             JobCapabilityTooLongException,
-            JobNameTooLongException, JobBandTooLongException {
+            JobNameTooLongException, JobBandTooLongException,
+            JobFamilyTooLongException {
         Mockito.when(databaseConnector.getConnection()).
                 thenReturn(conn);
         Mockito.when(jobValidator.isValidJob(

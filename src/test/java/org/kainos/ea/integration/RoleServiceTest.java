@@ -31,6 +31,7 @@ public class RoleServiceTest {
 
         JobRequest jobRequest = new JobRequest(
                 "Software engineer names is extended to be to long2",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering",
                 "band1",
@@ -49,6 +50,7 @@ public class RoleServiceTest {
     void postEmployeeShouldReturnError400WithTooLongSpec() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer",
+                "Job Family",
                 "The specification sumarry but is not alowed "
                         + "to be too long beacasue that would break the "
                         + "system as their is only so"
@@ -74,6 +76,7 @@ public class RoleServiceTest {
     void postEmployeeShouldReturnError400WithTooLongCapabilityName() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering is an example of a"
                         + " capability name this should be too long",
@@ -93,6 +96,7 @@ public class RoleServiceTest {
     void postEmployeeShouldReturnError400WithTooLongBandName() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering",
                 "band name is not alowed to be too long",
@@ -111,6 +115,7 @@ public class RoleServiceTest {
     void postEmployeeShouldReturnError400WithTooLongResponsibilities() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer names is extended to be to long",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering",
                 "band1",
@@ -133,6 +138,7 @@ public class RoleServiceTest {
     void postEmployeeShouldReturnError400WithInvalidSharePointLink() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer names is extended to be to long",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering",
                 "band1",
@@ -155,6 +161,7 @@ public class RoleServiceTest {
         // data or delete the data form the dataBase
         JobRequest jobRequest = new JobRequest(
                 "deleteme",
+                "engineering",
                 "The specification sumarry",
                 "Engineering",
                 "band1",

@@ -44,7 +44,7 @@ public class RoleDao {
         String insertStatment = "INSERT INTO  JobRole ("
                 + "RoleName, JobFamily, Specification, CapabilityName,"
                 + " Responsibilities, Sharepointlink )"
-                + " VALUES(?,?,?,?,?)";
+                + " VALUES(?,?,?,?,?,?)";
         PreparedStatement st = c.prepareStatement(insertStatment,
                 Statement.RETURN_GENERATED_KEYS);
 

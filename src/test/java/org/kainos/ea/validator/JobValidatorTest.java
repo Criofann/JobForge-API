@@ -1,12 +1,7 @@
 package org.kainos.ea.validator;
 
 import org.kainos.ea.cli.JobRequest;
-import org.kainos.ea.client.NotURLException;
-import org.kainos.ea.client.JobCapabilityTooLongException;
-import org.kainos.ea.client.JobSpecTooLongException;
-import org.kainos.ea.client.JobNameTooLongException;
-import org.kainos.ea.client.JobBandTooLongException;
-import org.kainos.ea.client.ResponsibilityTooLongException;
+import org.kainos.ea.client.*;
 import org.kainos.ea.core.JobValidator;
 
 import org.junit.jupiter.api.Test;
@@ -21,9 +16,11 @@ public class JobValidatorTest {
     public void isValidJobShouldAssertNullWhenValidEmployee()
             throws JobNameTooLongException, JobSpecTooLongException,
             JobCapabilityTooLongException, JobBandTooLongException,
-            ResponsibilityTooLongException, NotURLException {
+            ResponsibilityTooLongException, NotURLException,
+            JobFamilyTooLongException {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering",
                 "band1",
@@ -38,6 +35,7 @@ public class JobValidatorTest {
     public void isValidJobShouldThrowJobNameTooLongExceptionWhenNameToLong() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer and too many many many Characters!!!!!!!",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering",
                 "band1",
@@ -52,6 +50,7 @@ public class JobValidatorTest {
     public void isValidJobShouldThrowJobSpecTooLongExceptionWhenSpecToLong() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer",
+                "Job Family",
                 "The specification sumarry not meant to be"
                         + "Very Very Very Very Very Very Very Very Very Very "
                         + "Very Very Very Very Very Very Very Very Very Very y"
@@ -69,6 +68,7 @@ public class JobValidatorTest {
     public void isValidJobShouldThrowJobCapTooLongExceptionWhenCapToLong() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer",
+                "Job Family",
                 "The specification sumarry",
                 "a vey long named capability",
                 "band1",
@@ -83,6 +83,7 @@ public class JobValidatorTest {
     public void isValidJobShouldThrowJobBandTooLongExceptionWhenBandToLong() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering",
                 "band Name that is tooooooooo loooong",
@@ -97,6 +98,7 @@ public class JobValidatorTest {
     public void isValidJobShouldThrowResTooLongExceptionWhenResToLong() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer ",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering",
                 "band1",
@@ -114,6 +116,7 @@ public class JobValidatorTest {
     public void isValidJobShouldThrowNotURLExceptionWhenSharpointIsNotURL() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer ",
+                "Job Family",
                 "The specification sumarry",
                 "Enginering",
                 "band1",

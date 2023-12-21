@@ -2,7 +2,6 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.JobRequest;
 import org.kainos.ea.cli.Role;
-import org.kainos.ea.core.JobFamilyValidator;
 import org.kainos.ea.core.JobValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
@@ -35,7 +34,7 @@ public class RoleService {
 
 
     private JobValidator jobValidator = new JobValidator();
-    private JobFamilyValidator jobFamilyValidator = new JobFamilyValidator();
+
 
 
 
@@ -57,44 +56,21 @@ public class RoleService {
             SQLException, InvalidJobException {
        try {
            Boolean validation = jobValidator.isValidJob(jobRequest);
-
+           System.out.println("validator passes");
            int id;
            try {
                id = roleDao.createJob(jobRequest,
                        databaseConnector.getConnection());
                return id;
            } catch (SQLException e) {
+               System.out.println("here");
                throw new SQLException();
            }
 
-       } catch (JobNameTooLongException | JobSpecTooLongException
-                | JobCapabilityTooLongException | JobBandTooLongException
-                | ResponsibilityTooLongException | NotURLException e) {
+       } catch (JobNameTooLongException | JobSpecTooLongException | JobCapabilityTooLongException |
+                JobBandTooLongException | ResponsibilityTooLongException |
+                NotURLException | JobFamilyTooLongException e) {
             throw new RuntimeException(e);
        }
     }
-
-    public int createJobFamily(JobFamilyRequest jobFamilyRequest)
-            throws FailedToCreateJobFamilyException,
-            InvalidJobFamilyException, SQLException {
-
-    try {
-
-        Boolean validation = jobFamilyValidator.isValidJobFamily(
-                jobFamilyRequest);
-
-
-        int id = roleDao.createJobFamiliy(
-                jobFamilyRequest, databaseConnector.getConnection());
-        return id;
-    } catch (SQLException e) {
-        System.err.println(e.getMessage());
-        throw new SQLException();
-    } catch (JobNameTooLongException | JobFamilyTooLongException e) {
-
-        throw new RuntimeException(e);
-    }
-
-    }
-
 }
