@@ -9,18 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.JobForgeWebServiceApplication;
 import org.kainos.ea.JobForgeWebServiceConfiguration;
-import org.kainos.ea.client.FailedToGenerateTokenException;
-import org.kainos.ea.client.FailedToLoginException;
-import org.kainos.ea.client.Login;
-
+import org.kainos.ea.cli.Login;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class AuthTests {

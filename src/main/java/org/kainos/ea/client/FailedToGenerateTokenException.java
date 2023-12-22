@@ -1,8 +1,8 @@
 package org.kainos.ea.client;
 
-public class FailedToGenerateTokenException extends Throwable{
+public class FailedToGenerateTokenException extends Throwable {
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return "Failed to generate token";
     }
 }

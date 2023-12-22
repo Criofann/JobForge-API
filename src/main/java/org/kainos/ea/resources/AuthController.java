@@ -2,13 +2,11 @@ package org.kainos.ea.resources;
 
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.AuthService;
-import org.kainos.ea.api.RoleService;
 import org.kainos.ea.client.FailedToGenerateTokenException;
 import org.kainos.ea.client.FailedToLoginException;
-import org.kainos.ea.client.Login;
+import org.kainos.ea.cli.Login;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
-import org.kainos.ea.db.RoleDao;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -29,14 +27,14 @@ public class AuthController {
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(Login login){
-        try{
+    public Response login(Login login) {
+        try {
             return Response.ok(authService.login(login)).build();
-        } catch (FailedToLoginException e){
+        } catch (FailedToLoginException e) {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } catch (FailedToGenerateTokenException e){
+        } catch (FailedToGenerateTokenException e) {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

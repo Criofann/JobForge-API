@@ -1,4 +1,4 @@
-package org.kainos.ea.client;
+package org.kainos.ea.cli;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,7 +25,7 @@ public class Login {
 
     @JsonCreator
     public Login(
-            @JsonProperty("username") String username, @JsonProperty("password") String password){
+            @JsonProperty("username") String username, @JsonProperty("password") String password) {
         this.username = username;
         this.password = password;
     }
