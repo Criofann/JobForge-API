@@ -4,6 +4,8 @@ import io.swagger.annotations.Api;
 import org.kainos.ea.api.BandService;
 import org.kainos.ea.client.BandDoesNotExistException;
 import org.kainos.ea.client.FailedToGetBandsException;
+import org.kainos.ea.db.BandDao;
+import org.kainos.ea.db.DatabaseConnector;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -14,7 +16,13 @@ import javax.ws.rs.core.Response;
 @Api("JobForge Dropwizard API")
 @Path("/api")
 public class BandController {
-    private BandService bandService = new BandService();
+    private static BandService bandService;
+    private DatabaseConnector databaseConnector;
+
+    public BandController() {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        bandService = new BandService(new BandDao(), databaseConnector);
+    }
     @GET
     @Path("/band")
     @Produces(MediaType.APPLICATION_JSON)
