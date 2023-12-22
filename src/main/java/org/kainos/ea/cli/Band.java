@@ -4,9 +4,8 @@ public class Band {
     private String bandName;
     private String bandLevel;
     private String competencies;
-    
     public Band(String bandName,
-                String bandLevel,String competencies) {
+                String bandLevel, String competencies) {
         this.bandName = bandName;
         this.bandLevel = bandLevel;
         this.competencies = competencies;
