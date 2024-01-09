@@ -19,7 +19,8 @@ public class AuthService {
         this.databaseConnector = databaseConnector;
     }
 
-    public String login(Login login) throws FailedToAuthenticateException, FailedToGenerateTokenException, ServerErrorException {
+    public String login(Login login) throws FailedToAuthenticateException, FailedToGenerateTokenException,
+            ServerErrorException {
         try {
             Connection conn = databaseConnector.getConnection();
             if (authDao.validLogin(login, conn)) {

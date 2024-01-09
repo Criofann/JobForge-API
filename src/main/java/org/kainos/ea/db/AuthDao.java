@@ -1,6 +1,10 @@
 package org.kainos.ea.db;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.time.DateUtils;
 import org.kainos.ea.cli.Login;
 import org.kainos.ea.client.FailedToGetJWTSecret;
@@ -21,9 +25,9 @@ import java.util.Date;
 public class AuthDao {
     private final Key hmacKey;
     //Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(32, 64, 1, 15 * 1024, 2);
-    Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(16, 32, 1, 60000, 10);
+    private final Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(16, 32, 1, 60000, 10);
 
-    public AuthDao() throws FailedToGetJWTSecret{
+    public AuthDao() throws FailedToGetJWTSecret {
         try {
             hmacKey = new SecretKeySpec(Base64.getDecoder().decode(System.getenv("JWT_SECRET")),
                     SignatureAlgorithm.HS256.getJcaName());
@@ -33,8 +37,6 @@ public class AuthDao {
     }
 
     public boolean validLogin(Login login, Connection conn) throws ServerErrorException {
-        System.out.println("ADMIN PASSWORD HASHED HERE");
-        System.out.println(encoder.encode("admin"));
         try {
             Statement st = conn.createStatement();
 
@@ -73,7 +75,7 @@ public class AuthDao {
     }
 
     public Claims parseToken(String token) throws FailedToAuthenticateException, ServerErrorException {
-        try{
+        try {
             return Jwts.parserBuilder()
                     .setSigningKey(hmacKey)
                     .build()
@@ -81,7 +83,7 @@ public class AuthDao {
                     .getBody();
         } catch (ExpiredJwtException e) {
             throw new FailedToAuthenticateException("Expired token");
-        } catch (MalformedJwtException e){
+        } catch (MalformedJwtException e) {
             throw new ServerErrorException("Invalid token");
         }
     }

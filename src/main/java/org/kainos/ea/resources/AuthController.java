@@ -25,7 +25,7 @@ public class AuthController {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         try {
             authService = new AuthService(new AuthDao(), databaseConnector);
-        } catch (FailedToGetJWTSecret e){
+        } catch (FailedToGetJWTSecret e) {
             System.err.println("Failed to get JWT secret");
         }
     }
@@ -39,7 +39,7 @@ public class AuthController {
         } catch (FailedToAuthenticateException e) {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } catch (FailedToGenerateTokenException |ServerErrorException e) {
+        } catch (FailedToGenerateTokenException | ServerErrorException e) {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
