@@ -1,9 +1,13 @@
 package org.kainos.ea.cli;
 
-public class Role {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class RoleRequest {
     private String roleName;
     private String specification;
     private String capabilityName;
+    private String bandName;
     private String responsibilities;
     private String sharepointLink;
 
@@ -31,6 +35,14 @@ public class Role {
         this.capabilityName = capabilityName;
     }
 
+    public String getBandName() {
+        return bandName;
+    }
+
+    public void setBandName(String bandName) {
+        this.bandName = bandName;
+    }
+
     public String getResponsibilities() {
         return responsibilities;
     }
@@ -47,15 +59,20 @@ public class Role {
         this.sharepointLink = sharepointLink;
     }
 
-
-    public Role(String roleName, String specification,
-                String capabilityName,
-                String responsibilities, String sharepointLink) {
-
+    @JsonCreator
+    public RoleRequest(
+            @JsonProperty("RoleName") String roleName,
+            @JsonProperty("Specification") String specification,
+            @JsonProperty("CapabilityName") String capabilityName,
+            @JsonProperty("BandName") String bandName,
+            @JsonProperty("Responsibilities") String responsibilities,
+            @JsonProperty("SharepointLink") String sharepointLink) {
         this.roleName = roleName;
         this.specification = specification;
         this.capabilityName = capabilityName;
+        this.bandName = bandName;
         this.responsibilities = responsibilities;
         this.sharepointLink = sharepointLink;
+
     }
 }

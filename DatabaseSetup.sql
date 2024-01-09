@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS JobFamily(
 	JobFamily VARCHAR(30) PRIMARY KEY,
     RoleName VARCHAR(30),
     FOREIGN KEY(RoleName) REFERENCES JobRole(RoleName)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS JobRole(
@@ -45,7 +46,7 @@ CREATE TABLE IF NOT EXISTS JobRole(
     CapabilityName VARCHAR(20),
     BandName VARCHAR(20),
     Responsibilities VARCHAR(100),
-    SharepointLink VARCHAR(100),
+    SharepointLink VARCHAR(500),
     FOREIGN KEY(BandName) REFERENCES Band(BandName),
     FOREIGN KEY(CapabilityName) REFERENCES Capability(CapabilityName)
 );
