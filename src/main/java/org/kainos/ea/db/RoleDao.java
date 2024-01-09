@@ -44,12 +44,13 @@ public class RoleDao {
 
         ResultSet resultSet = statement.executeQuery("SELECT RoleName,"
                 + " Specification,"
-                + " CapabilityName, BandName, Responsibilities, SharepointLink"
+                + " CapabilityName, BandName, Responsibilities, SharepointLink, JobFamily"
                 + " FROM `JobRole` WHERE RoleName=" + "'" + role + "'");
 
         while (resultSet.next()) {
             return new Role(
                     resultSet.getString("RoleName"),
+                    resultSet.getString("JobFamily"),
                     resultSet.getString("Specification"),
                     resultSet.getString("CapabilityName"),
                     resultSet.getString("BandName"),
