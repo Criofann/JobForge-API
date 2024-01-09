@@ -9,8 +9,7 @@ import org.kainos.ea.resources.AuthController;
 import org.kainos.ea.resources.BandController;
 import org.kainos.ea.resources.RoleController;
 
-public class JobForgeWebServiceApplication
-        extends Application<JobForgeWebServiceConfiguration> {
+public class JobForgeWebServiceApplication extends Application<JobForgeWebServiceConfiguration> {
 
     public static void main(final String[] args) throws Exception {
         new JobForgeWebServiceApplication().run(args);
@@ -22,14 +21,10 @@ public class JobForgeWebServiceApplication
     }
 
     @Override
-    public void
-    initialize(final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
-        bootstrap.addBundle(
-                new SwaggerBundle<JobForgeWebServiceConfiguration>() {
+    public void initialize(final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
+        bootstrap.addBundle(new SwaggerBundle<JobForgeWebServiceConfiguration>(){
             @Override
-            protected SwaggerBundleConfiguration
-            getSwaggerBundleConfiguration(
-                    JobForgeWebServiceConfiguration configuration) {
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(JobForgeWebServiceConfiguration configuration){
                 return configuration.getSwagger();
             }
         });
@@ -42,4 +37,5 @@ public class JobForgeWebServiceApplication
         environment.jersey().register(new BandController());
         environment.jersey().register(new AuthController());
     }
+
 }

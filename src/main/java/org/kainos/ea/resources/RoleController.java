@@ -9,17 +9,16 @@ import org.kainos.ea.client.InvalidRoleException;
 import org.kainos.ea.client.RoleDoesNotExistException;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
-import javax.ws.rs.Path;
 import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
-@Api("JobForge Dropwizard API")
 @Path("/api")
 public class RoleController {
+
     private static RoleService roleService;
 
     public RoleController() {
@@ -28,16 +27,10 @@ public class RoleController {
     }
 
     @GET
-    @Path("/job-roles")
+    @Path("/roles")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRoles() {
-        try {
-            return Response.ok(roleService.getRoles()).build();
-        } catch (FailedToGetRolesException e) {
-            System.err.println(e.getMessage());
-
-            return Response.serverError().build();
-        }
+    public String getRoles(){
+        return "Replace this with a list of roles";
     }
 
     @GET
