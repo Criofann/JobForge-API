@@ -1,47 +1,61 @@
 package org.kainos.ea.db;
 
+import io.jsonwebtoken.*;
 import org.apache.commons.lang3.time.DateUtils;
 import org.kainos.ea.cli.Login;
+import org.kainos.ea.client.FailedToGetJWTSecret;
+import org.kainos.ea.client.FailedToAuthenticateException;
+import org.kainos.ea.client.ServerErrorException;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
+import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.util.Base64;
 import java.util.Date;
-import java.util.UUID;
 
 public class AuthDao {
-    public boolean validLogin(Login login, Connection conn) throws SQLException {
+    private final Key hmacKey;
+    //Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(32, 64, 1, 15 * 1024, 2);
+    Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(16, 32, 1, 60000, 10);
+
+    public AuthDao() throws FailedToGetJWTSecret{
+        try {
+            hmacKey = new SecretKeySpec(Base64.getDecoder().decode(System.getenv("JWT_SECRET")),
+                    SignatureAlgorithm.HS256.getJcaName());
+        } catch (Exception e) {
+            throw new FailedToGetJWTSecret();
+        }
+    }
+
+    public boolean validLogin(Login login, Connection conn) throws ServerErrorException {
+        System.out.println("ADMIN PASSWORD HASHED HERE");
+        System.out.println(encoder.encode("admin"));
         try {
             Statement st = conn.createStatement();
 
             ResultSet rs = st.executeQuery("SELECT Password FROM `User` WHERE Email = '" + login.getUsername() + "'");
             while (rs.next()) {
-                return rs.getString("password").equals(login.getPassword());
+                return encoder.matches(login.getPassword(), rs.getString("password"));
             }
-
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            throw new ServerErrorException("SQL Exception");
         }
         return false;
     }
 
-    public String generateToken(String username, Connection conn) throws SQLException {
-        String token = UUID.randomUUID().toString();
-        Date expiry = DateUtils.addHours(new Date(), 8);
-
-        String insertStatement = "INSERT INTO Token(Email, Token, Expiry) VALUES(?, ?, ?)";
-
-        PreparedStatement st = conn.prepareStatement(insertStatement);
-
-        st.setString(1, username);
-        st.setString(2, token);
-        st.setTimestamp(3, new java.sql.Timestamp(expiry.getTime()));
-
-        st.executeUpdate();
-
-        return token;
+    public String generateToken(String username) {
+        Date currentDate = new Date();
+        return Jwts.builder()
+                .claim("username", username)
+                .setIssuedAt(currentDate)
+                .setExpiration(DateUtils.addHours(currentDate, 8))
+                .signWith(hmacKey)
+                .compact();
     }
 
     public int registerUser(Login login, Connection conn) throws SQLException {
@@ -56,5 +70,19 @@ public class AuthDao {
         st.executeUpdate();
 
         return 1;
+    }
+
+    public Claims parseToken(String token) throws FailedToAuthenticateException, ServerErrorException {
+        try{
+            return Jwts.parserBuilder()
+                    .setSigningKey(hmacKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            throw new FailedToAuthenticateException("Expired token");
+        } catch (MalformedJwtException e){
+            throw new ServerErrorException("Invalid token");
+        }
     }
 }

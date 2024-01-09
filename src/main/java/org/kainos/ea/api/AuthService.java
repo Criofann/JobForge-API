@@ -1,8 +1,9 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.client.FailedToGenerateTokenException;
-import org.kainos.ea.client.FailedToLoginException;
+import org.kainos.ea.client.FailedToAuthenticateException;
 import org.kainos.ea.cli.Login;
+import org.kainos.ea.client.ServerErrorException;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
 
@@ -18,19 +19,16 @@ public class AuthService {
         this.databaseConnector = databaseConnector;
     }
 
-    public String login(Login login) throws FailedToLoginException, FailedToGenerateTokenException {
+    public String login(Login login) throws FailedToAuthenticateException, FailedToGenerateTokenException, ServerErrorException {
         try {
             Connection conn = databaseConnector.getConnection();
             if (authDao.validLogin(login, conn)) {
-                try {
-                    return authDao.generateToken(login.getUsername(), conn);
-                } catch (SQLException e) {
-                    throw new FailedToGenerateTokenException();
-                }
+                    return authDao.generateToken(login.getUsername());
+            } else {
+                throw new FailedToAuthenticateException("Invalid login");
             }
         } catch (SQLException e) {
-            System.err.println("Failed to get database connection");
+            throw new ServerErrorException("Failed to get database connection");
         }
-        throw new FailedToLoginException();
     }
 }

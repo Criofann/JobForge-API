@@ -11,7 +11,7 @@ INSERT INTO Role(RoleID, Name) VALUES(2, 'Employee');
 
 CREATE TABLE `User`(
 	Email VARCHAR(64) NOT NULL,
-    Password VARCHAR(64) NOT NULL,
+    Password VARCHAR(256) NOT NULL,
     RoleID TINYINT NOT NULL,
     PRIMARY KEY(Email),
     FOREIGN KEY(RoleID) REFERENCES Role(RoleID)

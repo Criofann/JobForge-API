@@ -6,8 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.api.AuthService;
 import org.kainos.ea.client.FailedToGenerateTokenException;
-import org.kainos.ea.client.FailedToLoginException;
+import org.kainos.ea.client.FailedToAuthenticateException;
 import org.kainos.ea.cli.Login;
+import org.kainos.ea.client.ServerErrorException;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -35,22 +36,22 @@ public class AuthServiceTests {
     @Test
     @DisplayName("Test valid login details")
     public void loginShouldReturnTokenWhenIsValidLoginReturnsTrue() throws SQLException,
-            FailedToLoginException, FailedToGenerateTokenException {
+            FailedToAuthenticateException, FailedToGenerateTokenException, ServerErrorException {
         String token = "24da3182-c17e-4951-a9b0-bfb763396abe";
 
         when(databaseConnector.getConnection()).thenReturn(c);
         when(authDao.validLogin(login, c)).thenReturn(Boolean.TRUE);
-        when(authDao.generateToken(login.getUsername(), c)).thenReturn(token);
+        when(authDao.generateToken(login.getUsername())).thenReturn(token);
 
         assertEquals(token, authService.login(login));
     }
 
     @Test
     @DisplayName("Test invalid login details")
-    public void loginShouldReturnExceptionWhenIsValidLoginReturnsFalse() throws SQLException {
+    public void loginShouldReturnExceptionWhenIsValidLoginReturnsFalse() throws SQLException, ServerErrorException {
         when(databaseConnector.getConnection()).thenReturn(c);
         when(authDao.validLogin(login, c)).thenReturn(Boolean.FALSE);
 
-        assertThrows(FailedToLoginException.class, () -> authService.login(login));
+        assertThrows(FailedToAuthenticateException.class, () -> authService.login(login));
     }
 }
