@@ -1,4 +1,4 @@
-# JobForgeWebService
+# JobForgeWebService #
 
 How to start the JobForgeWebService application
 ---
@@ -10,4 +10,4 @@ How to start the JobForgeWebService application
 Health Check
 ---
 
-To see your applications health enter url `http://localhost:8081/healthcheck`
+To see your applications health enter URL `http://localhost:8081/healthcheck`

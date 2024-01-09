@@ -1,39 +1,51 @@
 package org.kainos.ea.db;
-
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DatabaseConnector {
+    public static final String ENV_DB_USERNAME = "DB_USERNAME";
+    public static final String ENV_DB_PASSWORD = "DB_PASSWORD";
+    public static final String ENV_DB_HOST = "DB_HOST";
+    public static final String ENV_DB_NAME = "DB_NAME";
 
-    private static Connection conn;
+    private static Connection connection;
 
-    public static Connection getConnection() throws SQLException {
-        String user, password, host, name;
+    public DatabaseProperties getDatabaseProperties() {
+        String username = System.getenv(ENV_DB_USERNAME);
+        String password = System.getenv(ENV_DB_PASSWORD);
+        String host = System.getenv(ENV_DB_HOST);
+        String name = System.getenv(ENV_DB_NAME);
 
-        if (conn != null && !conn.isClosed()) { return conn;}
+        return new DatabaseProperties(username, password, host, name);
+    }
+    public Connection getConnection(DatabaseProperties props)
+            throws SQLException {
+        return DriverManager.getConnection(
+                "jdbc:mysql://" + props.getHost() + "/" + props.getName()
+                        + "?useSSL=false",
+                props.getUsername(), props.getPassword());
+    }
 
-        try(FileInputStream propsStream = new FileInputStream("db.properties")){
+    public Connection getConnection()
+            throws SQLException {
+        if (DatabaseConnector.connection != null
+                && !DatabaseConnector.connection.isClosed()) {
+            return DatabaseConnector.connection;
+        }
 
-            Properties props = new Properties();
-            props.load(propsStream);
-
-            user = props.getProperty("user");
-            password = props.getProperty("password");
-            host = props.getProperty("host");
-            name = props.getProperty("name");
-
-            if (user == null || password == null || host == null)
-                throw new IllegalArgumentException("Properties file must exist "+
-                        "and must contain user, password, name and host properties.");
-
-            conn = DriverManager.getConnection("jdbc:mysql://" + host + "/" + name + "?useSSL=false", user, password);
-            return conn;
-
-
-        } catch (Exception e){
+        try {
+            DatabaseProperties props = getDatabaseProperties();
+            if (!props.isValid()) {
+                throw new IllegalArgumentException(
+                        "Environment variables must be set for "
+                                + "DB_USERNAME, DB_PASSWORD, "
+                                + "DB_HOST, and DB_NAME."
+                );
+            }
+            DatabaseConnector.connection = getConnection(props);
+            return DatabaseConnector.connection;
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         return null;
