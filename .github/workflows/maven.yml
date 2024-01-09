@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main, ready-for-signoff ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, ready-for-signoff ]
+    branches: [ main ]
 
 env:
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
