@@ -1,7 +1,7 @@
 package org.kainos.ea.core;
 import org.kainos.ea.cli.RoleRequest;
 
-public class RoleValidator {
+public final class RoleValidator {
     public static String isValidRole(RoleRequest role) {
         if (role.getBandName().length() > 100) {
             return "Name greater than 100 characters";
@@ -19,5 +19,8 @@ public class RoleValidator {
             return "Link too short not valid";
         }
         return null;
+    }
+
+    private RoleValidator() {
     }
 }

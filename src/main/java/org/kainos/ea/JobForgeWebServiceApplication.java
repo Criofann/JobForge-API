@@ -22,9 +22,9 @@ public class JobForgeWebServiceApplication extends Application<JobForgeWebServic
 
     @Override
     public void initialize(final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
-        bootstrap.addBundle(new SwaggerBundle<JobForgeWebServiceConfiguration>(){
+        bootstrap.addBundle(new SwaggerBundle<JobForgeWebServiceConfiguration>() {
             @Override
-            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(JobForgeWebServiceConfiguration configuration){
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(JobForgeWebServiceConfiguration configuration) {
                 return configuration.getSwagger();
             }
         });

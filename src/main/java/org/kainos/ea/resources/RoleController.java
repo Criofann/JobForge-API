@@ -1,6 +1,5 @@
 package org.kainos.ea.resources;
 
-import io.swagger.annotations.Api;
 import org.kainos.ea.api.RoleService;
 import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.client.FailedToGetRolesException;
@@ -28,10 +27,16 @@ public class RoleController {
     }
 
     @GET
-    @Path("/roles")
+    @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getRoles(){
-        return "Replace this with a list of roles";
+    public Response getRoles() {
+        try {
+            return Response.ok(roleService.getRoles()).build();
+        } catch (FailedToGetRolesException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
     }
 
     @GET

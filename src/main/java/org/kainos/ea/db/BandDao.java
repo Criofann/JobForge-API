@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BandDao {
 
-    private DatabaseConnector databaseConnector = new DatabaseConnector();
+    private final DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Band> getBands() throws SQLException {
         Connection c = databaseConnector.getConnection();
 

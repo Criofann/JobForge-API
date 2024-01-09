@@ -12,7 +12,7 @@ import java.util.List;
 import org.kainos.ea.cli.RoleRequest;
 
 public class RoleDao {
-    private DatabaseConnector databaseConnector = new DatabaseConnector();
+    private final DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Role> getRoles(Connection conn) throws SQLException {
 
         Statement st = conn.createStatement();
