@@ -8,7 +8,6 @@ import org.kainos.ea.client.InvalidRoleException;
 import org.kainos.ea.client.RoleDoesNotExistException;
 import org.kainos.ea.db.RoleDao;
 import org.kainos.ea.core.RoleValidator;
-
 import java.sql.SQLException;
 import java.util.List;
 

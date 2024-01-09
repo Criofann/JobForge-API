@@ -3,6 +3,7 @@ package org.kainos.ea.cli;
 public class Role {
     private String roleName;
     private String specification;
+    private String jobfamily;
     private String capabilityName;
     private String bandName;
     private String responsibilities;
@@ -14,6 +15,14 @@ public class Role {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public String getJobfamily() {
+        return jobfamily;
+    }
+
+    public void setJobfamily(String jobfamily) {
+        this.jobfamily = jobfamily;
     }
 
     public String getSpecification() {
@@ -56,8 +65,9 @@ public class Role {
         this.sharepointLink = sharepointLink;
     }
 
-    public Role(String roleName, String specification, String capabilityName, String bandName, String responsibilities, String sharepointLink) {
+    public Role(String roleName, String jobfamily, String specification, String capabilityName, String bandName, String responsibilities, String sharepointLink) {
         this.roleName = roleName;
+        this.jobfamily = jobfamily;
         this.specification = specification;
         this.capabilityName = capabilityName;
         this.bandName = bandName;
@@ -65,8 +75,9 @@ public class Role {
         this.sharepointLink = sharepointLink;
     }
 
-    public Role(String roleName, String specification, String responsibilities, String sharepointLink) {
+    public Role(String roleName, String jobfamily, String specification, String responsibilities, String sharepointLink) {
         this.roleName = roleName;
+        this.jobfamily = jobfamily;
         this.specification = specification;
         this.responsibilities = responsibilities;
         this.sharepointLink = sharepointLink;

@@ -1,11 +1,6 @@
 package org.kainos.ea.db;
-
-import io.swagger.annotations.Api;
 import org.kainos.ea.cli.Role;
 import org.kainos.ea.cli.RoleRequest;
-
-import javax.print.DocFlavor;
-import javax.ws.rs.Path;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +11,14 @@ public class RoleDao {
         Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("SELECT RoleName, Specification, Responsibilities, SharepointLink FROM `JobRole`;");
+        ResultSet rs = st.executeQuery("SELECT RoleName, JobFamily, Specification, Responsibilities, SharepointLink FROM `JobRole`;");
 
         List<Role> roleList = new ArrayList<>();
 
         while (rs.next()){
             Role jobRole = new Role(
                     rs.getString("RoleName"),
+                    rs.getString("JobFamily"),
                     rs.getString("Specification"),
                     rs.getString("Responsibilities"),
                     rs.getString("SharepointLink")
@@ -37,12 +33,13 @@ public class RoleDao {
 
         Statement statement = connection.createStatement();
 
-        ResultSet resultSet = statement.executeQuery("SELECT RoleName, Specification, CapabilityName, BandName, Responsibilities, SharepointLink" +
+        ResultSet resultSet = statement.executeQuery("SELECT RoleName, JobFamily, Specification, CapabilityName, BandName, Responsibilities, SharepointLink" +
                 " FROM `JobRole` WHERE RoleName=" + "'" + role + "'");
 
         while (resultSet.next()) {
             return new Role(
                     resultSet.getString("RoleName"),
+                    resultSet.getString("JobFamily"),
                     resultSet.getString("Specification"),
                     resultSet.getString("CapabilityName"),
                     resultSet.getString("BandName"),
@@ -56,17 +53,18 @@ public class RoleDao {
     public void updateRole(String role, RoleRequest roleRequest) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
-        String updateStatement = "UPDATE `JobRole` SET RoleName = ?, Specification = ?, CapabilityName = ?, BandName = ?, Responsibilities = ?, SharepointLink = ? WHERE RoleName = ?";
+        String updateStatement = "UPDATE `JobRole` SET RoleName = ?, JobFamily = ?, Specification = ?, CapabilityName = ?, BandName = ?, Responsibilities = ?, SharepointLink = ? WHERE RoleName = ?";
 
         PreparedStatement statement = connection.prepareStatement(updateStatement);
 
         statement.setString(1, roleRequest.getRoleName());
-        statement.setString(2, roleRequest.getSpecification());
-        statement.setString(3, roleRequest.getCapabilityName());
-        statement.setString(4, roleRequest.getBandName());
-        statement.setString(5, roleRequest.getResponsibilities());
-        statement.setString(6, roleRequest.getSharepointLink());
-        statement.setString(7, role);
+        statement.setString(2, roleRequest.getJobfamily());
+        statement.setString(3, roleRequest.getSpecification());
+        statement.setString(4, roleRequest.getCapabilityName());
+        statement.setString(5, roleRequest.getBandName());
+        statement.setString(6, roleRequest.getResponsibilities());
+        statement.setString(7, roleRequest.getSharepointLink());
+        statement.setString(8, role);
 
         statement.executeUpdate();
     }
