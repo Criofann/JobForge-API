@@ -4,6 +4,7 @@ package com.kainos.ea.integration;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -73,8 +74,13 @@ public class RoleServiceTest {
                 .post(Entity.entity(role, MediaType.APPLICATION_JSON_TYPE))
                 .readEntity(String.class);
 
+        Role roleResponse = APP.client().target("http://localhost:8080/api/job-roles" + name)
+                .request()
+                .delete(Role.class);
 
+        Assertions.assertTrue(EqualsBuilder.reflectionEquals(roleRequest, roleResponse));
 
+        Assertions.assertEquals(400, response.getStatus());
 
     }
 }
