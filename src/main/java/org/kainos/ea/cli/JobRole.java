@@ -3,7 +3,7 @@ package org.kainos.ea.cli;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JobRequest {
+public class JobRole {
     private String roleName;
     private String jobFamily;
     private String specification;
@@ -13,7 +13,7 @@ public class JobRequest {
     private String sharepointLink;
 
     @JsonCreator
-    public JobRequest(
+    public JobRole(
             @JsonProperty("roleName") String roleName,
             @JsonProperty("jobFamily") String jobFamily,
             @JsonProperty("specification") String specification,
@@ -86,8 +86,4 @@ public class JobRequest {
         this.sharepointLink = sharepointLink;
     }
 
-    public JobRequest() {
-    }
-
 }
-

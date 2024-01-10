@@ -1,6 +1,6 @@
 package org.kainos.ea.validator;
 
-import org.kainos.ea.cli.JobRequest;
+import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.client.ValidationException;
 import org.kainos.ea.core.JobValidator;
 
@@ -14,7 +14,7 @@ public class JobValidatorTest {
     private final JobValidator jobValidator = new JobValidator();
     @Test
     public void isValidJobShouldAssertNullWhenValidEmployee() {
-        JobRequest jobRequest = new JobRequest(
+        JobRole jobRole = new JobRole(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry",
@@ -25,11 +25,11 @@ public class JobValidatorTest {
 
         );
 
-        assertDoesNotThrow(() -> jobValidator.isValidJob(jobRequest));
+        assertDoesNotThrow(() -> jobValidator.isValidJob(jobRole));
     }
     @Test
     public void isValidJobShouldThrowJobNameTooLongExceptionWhenNameToLong() {
-        JobRequest jobRequest = new JobRequest(
+        JobRole jobRole = new JobRole(
                 "Software engineer and too many many many Characters!!!!!!!",
                 "Job Family",
                 "The specification sumarry",
@@ -40,11 +40,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRequest));
+                () -> jobValidator.isValidJob(jobRole));
     }
     @Test
     public void isValidJobShouldThrowJobSpecTooLongExceptionWhenSpecToLong() {
-        JobRequest jobRequest = new JobRequest(
+        JobRole jobRole = new JobRole(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry not meant to be"
@@ -58,11 +58,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRequest));
+                () -> jobValidator.isValidJob(jobRole));
     }
     @Test
     public void isValidJobShouldThrowJobCapTooLongExceptionWhenCapToLong() {
-        JobRequest jobRequest = new JobRequest(
+        JobRole jobRole = new JobRole(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry",
@@ -73,11 +73,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRequest));
+                () -> jobValidator.isValidJob(jobRole));
     }
     @Test
     public void isValidJobShouldThrowJobBandTooLongExceptionWhenBandToLong() {
-        JobRequest jobRequest = new JobRequest(
+        JobRole jobRole = new JobRole(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry",
@@ -88,11 +88,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRequest));
+                () -> jobValidator.isValidJob(jobRole));
     }
     @Test
     public void isValidJobShouldThrowResTooLongExceptionWhenResToLong() {
-        JobRequest jobRequest = new JobRequest(
+        JobRole jobRole = new JobRole(
                 "Software engineer ",
                 "Job Family",
                 "The specification sumarry",
@@ -106,11 +106,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRequest));
+                () -> jobValidator.isValidJob(jobRole));
     }
     @Test
     public void isValidJobShouldThrowNotURLExceptionWhenSharpointIsNotURL() {
-        JobRequest jobRequest = new JobRequest(
+        JobRole jobRole = new JobRole(
                 "Software engineer ",
                 "Job Family",
                 "The specification sumarry",
@@ -121,6 +121,6 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRequest));
+                () -> jobValidator.isValidJob(jobRole));
     }
 }

@@ -1,6 +1,6 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.JobRequest;
+import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.cli.Role;
 
 import org.kainos.ea.client.FailedToCreateJobException;
@@ -20,38 +20,33 @@ import java.util.List;
 public class RoleService {
     private RoleDao roleDao;
     private DatabaseConnector databaseConnector;
+    private JobValidator jobValidator;
 
-    public RoleService(RoleDao roleDao, DatabaseConnector databaseConnector) {
+    public RoleService(RoleDao roleDao, DatabaseConnector databaseConnector,
+                       JobValidator jobValidator) {
         this.roleDao = roleDao;
         this.databaseConnector = databaseConnector;
+        this.jobValidator = jobValidator;
     }
-
-
-    private JobValidator jobValidator = new JobValidator();
-
-
-
-
 
     public List<Role> getRoles()
             throws FailedToGetRolesException {
-        List<Role> roleList;
         try {
-            roleList = roleDao.getRoles(databaseConnector.getConnection());
-            return roleList;
+            return roleDao.getRoles(databaseConnector.getConnection());
+
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
         }
 
     }
 
-    public void createJob(JobRequest jobRequest)
+    public void createJob(JobRole jobRole)
             throws FailedToCreateJobException,
             SQLException, InvalidJobException,
             ValidationException {
-          jobValidator.isValidJob(jobRequest);
+          jobValidator.isValidJob(jobRole);
 
-          roleDao.createJob(jobRequest,
+          roleDao.createJob(jobRole,
                   databaseConnector.getConnection());
 
     }
