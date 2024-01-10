@@ -42,11 +42,11 @@ public class RoleService {
         List<Role> roleList;
         try {
             roleList = roleDao.getRoles(databaseConnector.getConnection());
+            return roleList;
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
         }
 
-        return roleList;
     }
 
     public int createJob(JobRequest jobRequest)
