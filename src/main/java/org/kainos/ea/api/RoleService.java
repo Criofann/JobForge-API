@@ -54,7 +54,6 @@ public class RoleService {
             SQLException, InvalidJobException {
        try {
            Boolean validation = jobValidator.isValidJob(jobRequest);
-           System.out.println("validator passes");
            int id;
            try {
                id = roleDao.createJob(jobRequest,
