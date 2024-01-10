@@ -1,10 +1,8 @@
 package org.kainos.ea.resources;
 
 import io.swagger.annotations.Api;
-import org.kainos.ea.api.BandRoleService;
 import org.kainos.ea.api.RoleService;
 import org.kainos.ea.client.FailedToGetRolesException;
-import org.kainos.ea.db.BandRoleDAO;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDAO;
 
@@ -18,13 +16,10 @@ import javax.ws.rs.core.Response;
 @Path("/api")
 public class RoleController {
     private static RoleService roleService;
-    private DatabaseConnector databaseConnector;
 
     public RoleController() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         roleService = new RoleService(new RoleDAO(), databaseConnector);
-        bandRoleService = new BandRoleService(
-                new BandRoleDAO(), databaseConnector);
     }
     @GET
     @Path("/job-roles")
@@ -39,7 +34,7 @@ public class RoleController {
         }
     }
 
-    private static BandRoleService bandRoleService;
+    private static RoleService bandRoleService;
     @GET
     @Path("/BandRole")
     @Produces(MediaType.APPLICATION_JSON)

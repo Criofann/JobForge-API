@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response;
 @Path("/api")
 public class BandController {
     private static BandService bandService;
-    private DatabaseConnector databaseConnector;
 
     public BandController() {
         DatabaseConnector databaseConnector = new DatabaseConnector();

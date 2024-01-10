@@ -1,5 +1,6 @@
 package org.kainos.ea.api;
 
+import org.kainos.ea.cli.BandRole;
 import org.kainos.ea.cli.Role;
 import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.db.DatabaseConnector;
@@ -20,6 +21,18 @@ public class RoleService {
         List<Role> roleList;
         try {
             roleList = roleDao.getRoles();
+
+        } catch (SQLException e) {
+            throw new FailedToGetRolesException();
+        }
+
+        return roleList;
+    }
+
+    public List<BandRole> getBandRole() throws FailedToGetRolesException {
+        List<BandRole> roleList;
+        try {
+            roleList = roleDao.getBandRole();
 
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
