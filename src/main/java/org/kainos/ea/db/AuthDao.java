@@ -29,8 +29,6 @@ public class AuthDao {
 
     public AuthDao() throws FailedToGetJWTSecret {
         try {
-            System.out.println("JWT SECRET HERE");
-            System.out.println(System.getenv("JWT_SECRET"));
             hmacKey = new SecretKeySpec(Base64.getDecoder().decode(System.getenv("JWT_SECRET")),
                     SignatureAlgorithm.HS256.getJcaName());
         } catch (Exception e) {
