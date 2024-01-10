@@ -20,7 +20,7 @@ public class RoleDao {
 
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery("SELECT RoleName, Specification,"
-                + " CapabilityName "
+                + " CapabilityName,"
                 + "BandName, Responsibilities,"
                 + " SharepointLink FROM `JobRole`;");
         List<Role> roleList = new ArrayList<>();
@@ -29,8 +29,8 @@ public class RoleDao {
             Role jobRole = new Role(
                     rs.getString("RoleName"),
                     rs.getString("Specification"),
-                    rs.getString("Capability Name"),
-                    rs.getString("Band Name"),
+                    rs.getString("CapabilityName"),
+                    rs.getString("BandName"),
                     rs.getString("Responsibilities"),
                     rs.getString("SharepointLink")
             );
@@ -56,7 +56,6 @@ public class RoleDao {
         st.setString(4, jobRequest.getCapabilityName());
         st.setString(5, jobRequest.getResponsibilities());
         st.setString(6, jobRequest.getSharepointLink());
-
 
         st.executeUpdate();
         // if insert fails error will be thrown
