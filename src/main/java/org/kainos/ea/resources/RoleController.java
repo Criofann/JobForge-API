@@ -34,13 +34,12 @@ public class RoleController {
         }
     }
 
-    private static RoleService bandRoleService;
     @GET
     @Path("/BandRole")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBandRole() {
         try {
-            return Response.ok(bandRoleService.getBandRole()).build();
+            return Response.ok(roleService.getBandRole()).build();
         } catch (FailedToGetRolesException e) {
             System.err.println(e.getMessage());
 
