@@ -7,6 +7,16 @@ public class Role {
     private String bandName;
     private String responsibilities;
     private String sharepointLink;
+    public Role(String roleName, String specification,
+                String capabilityName, String bandName,
+                String responsibilities, String sharepointLink) {
+        this.roleName = roleName;
+        this.specification = specification;
+        this.capabilityName = capabilityName;
+        this.bandName = bandName;
+        this.responsibilities = responsibilities;
+        this.sharepointLink = sharepointLink;
+    }
 
     public String getRoleName() {
         return roleName;
@@ -53,25 +63,6 @@ public class Role {
     }
 
     public void setSharepointLink(String sharepointLink) {
-        this.sharepointLink = sharepointLink;
-    }
-
-    public Role(String roleName, String specification,
-                String capabilityName, String bandName,
-                String responsibilities, String sharepointLink) {
-        this.roleName = roleName;
-        this.specification = specification;
-        this.capabilityName = capabilityName;
-        this.bandName = bandName;
-        this.responsibilities = responsibilities;
-        this.sharepointLink = sharepointLink;
-    }
-
-    public Role(String roleName, String specification,
-                String responsibilities, String sharepointLink) {
-        this.roleName = roleName;
-        this.specification = specification;
-        this.responsibilities = responsibilities;
         this.sharepointLink = sharepointLink;
     }
 }

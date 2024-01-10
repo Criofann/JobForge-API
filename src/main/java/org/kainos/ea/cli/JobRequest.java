@@ -12,6 +12,24 @@ public class JobRequest {
     private String responsibilities;
     private String sharepointLink;
 
+    @JsonCreator
+    public JobRequest(
+            @JsonProperty("roleName") String roleName,
+            @JsonProperty("jobFamily") String jobFamily,
+            @JsonProperty("specification") String specification,
+            @JsonProperty("capabilityName") String capabilityName,
+            @JsonProperty("bandName") String bandName,
+            @JsonProperty("responsibilities") String responsibilities,
+            @JsonProperty("sharepointLink") String sharepointLink) {
+        this.roleName = roleName;
+        this.jobFamily = jobFamily;
+        this.specification = specification;
+        this.capabilityName = capabilityName;
+        this.bandName = bandName;
+        this.responsibilities = responsibilities;
+        this.sharepointLink = sharepointLink;
+    }
+
     public String getJobFamily() {
         return jobFamily;
     }
@@ -70,26 +88,6 @@ public class JobRequest {
 
     public JobRequest() {
     }
-
-    @JsonCreator
-    public JobRequest(
-            @JsonProperty("roleName") String roleName,
-            @JsonProperty("jobFamily") String jobFamily,
-            @JsonProperty("specification") String specification,
-            @JsonProperty("capabilityName") String capabilityName,
-            @JsonProperty("bandName") String bandName,
-            @JsonProperty("responsibilities") String responsibilities,
-            @JsonProperty("sharepointLink") String sharepointLink) {
-                this.roleName = roleName;
-                this.jobFamily = jobFamily;
-                this.specification = specification;
-                this.capabilityName = capabilityName;
-                this.bandName = bandName;
-                this.responsibilities = responsibilities;
-                this.sharepointLink = sharepointLink;
-            }
-
-
 
 }
 

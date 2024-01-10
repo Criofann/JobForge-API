@@ -19,14 +19,17 @@ public class RoleDao {
     public List<Role> getRoles(Connection con) throws SQLException {
 
         Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery("SELECT RoleName, Specification, "
-                + "Responsibilities, SharepointLink FROM `JobRole`;");
+        ResultSet rs = st.executeQuery("SELECT RoleName, Specification, CapabilityName "
+                + "BandName, Responsibilities,"
+                + " SharepointLink FROM `JobRole`;");
         List<Role> roleList = new ArrayList<>();
 
         while (rs.next()) {
             Role jobRole = new Role(
                     rs.getString("RoleName"),
                     rs.getString("Specification"),
+                    rs.getString("Capability Name"),
+                    rs.getString("Band Name"),
                     rs.getString("Responsibilities"),
                     rs.getString("SharepointLink")
             );
