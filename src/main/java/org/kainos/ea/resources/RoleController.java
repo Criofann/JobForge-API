@@ -44,7 +44,6 @@ public class RoleController {
     public RoleController() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         roleService = new RoleService(new RoleDao(), databaseConnector);
-        jobValidator = new JobValidator();
     }
 
 
