@@ -9,7 +9,6 @@ import org.kainos.ea.cli.Login;
 import org.kainos.ea.client.ServerErrorException;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
-
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

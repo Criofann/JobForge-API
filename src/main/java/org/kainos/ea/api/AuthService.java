@@ -6,7 +6,6 @@ import org.kainos.ea.cli.Login;
 import org.kainos.ea.client.ServerErrorException;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
