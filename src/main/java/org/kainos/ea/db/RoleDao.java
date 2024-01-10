@@ -1,7 +1,6 @@
 package org.kainos.ea.db;
 
 import org.kainos.ea.cli.Role;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,7 @@ import java.util.List;
 import org.kainos.ea.cli.RoleRequest;
 
 public class RoleDao {
-    private DatabaseConnector databaseConnector = new DatabaseConnector();
+    private final DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Role> getRoles(Connection conn) throws SQLException {
 
         Statement st = conn.createStatement();
