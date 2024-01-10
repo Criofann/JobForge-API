@@ -37,11 +37,11 @@ public class RoleService {
 
 
 
-    public List<Role> getRoles(DatabaseConnector connector)
+    public List<Role> getRoles()
             throws FailedToGetRolesException {
         List<Role> roleList;
         try {
-            roleList = roleDao.getRoles(connector.getConnection());
+            roleList = roleDao.getRoles(databaseConnector.getConnection());
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
         }

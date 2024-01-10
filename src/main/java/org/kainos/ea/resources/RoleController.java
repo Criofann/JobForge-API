@@ -53,9 +53,8 @@ public class RoleController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRoles() {
         try {
-            DatabaseConnector databaseConnector = new DatabaseConnector();
 
-            return Response.ok(roleService.getRoles(databaseConnector)).build();
+            return Response.ok(roleService.getRoles()).build();
         } catch (FailedToGetRolesException e) {
             System.err.println(e.getMessage());
 
