@@ -34,7 +34,7 @@ public class AuthTests {
                 .request()
                 .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
     }
 
     @Test
