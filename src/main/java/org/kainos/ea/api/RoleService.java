@@ -1,6 +1,6 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.cli.Role;
 
 import org.kainos.ea.client.FailedToCreateJobException;
@@ -40,13 +40,13 @@ public class RoleService {
 
     }
 
-    public void createJob(JobRole jobRole)
+    public void createJob(RoleRequest roleRequest)
             throws FailedToCreateJobException,
             SQLException, InvalidJobException,
             ValidationException {
-          jobValidator.isValidJob(jobRole);
+          jobValidator.isValidJob(roleRequest);
 
-          roleDao.createJob(jobRole,
+          roleDao.createJob(roleRequest,
                   databaseConnector.getConnection());
 
     }

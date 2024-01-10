@@ -3,7 +3,7 @@ package org.kainos.ea.service;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.api.RoleService;
-import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.client.ValidationException;
 import org.kainos.ea.core.JobValidator;
 import org.kainos.ea.db.DatabaseConnector;
@@ -25,7 +25,7 @@ public class RoleServiceTest {
     private final RoleService roleService
             = new RoleService(roleDao, databaseConnector, jobValidator);
 
-    private final JobRole jobRole = new JobRole(
+    private final RoleRequest roleRequest = new RoleRequest(
             "Software engineer6",
             "Job Family",
             "The specification sumarry",
@@ -42,11 +42,11 @@ public class RoleServiceTest {
             throws SQLException, ValidationException {
         Mockito.when(databaseConnector.getConnection()).
                 thenReturn(conn);
-        Mockito.doNothing().when(jobValidator).isValidJob(jobRole);
+        Mockito.doNothing().when(jobValidator).isValidJob(roleRequest);
         Mockito.doThrow(SQLException.class).when(
-                roleDao).createJob(jobRole, conn);
+                roleDao).createJob(roleRequest, conn);
         assertThrows(SQLException.class,
-                () -> roleService.createJob(jobRole));
+                () -> roleService.createJob(roleRequest));
     }
 }
 

@@ -1,36 +1,36 @@
 package org.kainos.ea.core;
 
-import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.client.ValidationException;
 
 
 import java.net.URL;
 
 public class JobValidator {
-    public void isValidJob(JobRole jobRole) throws
+    public void isValidJob(RoleRequest roleRequest) throws
             ValidationException {
         int nameLimit = 20;
         int specAndResLimit = 100;
-        if (jobRole.getRoleName().length() > nameLimit) {
+        if (roleRequest.getRoleName().length() > nameLimit) {
             throw new ValidationException("Role name too long");
         }
-        if (jobRole.getJobFamily().length() > nameLimit) {
+        if (roleRequest.getJobFamily().length() > nameLimit) {
             throw new ValidationException("Family name too long");
         }
-        if (jobRole.getSpecification().length() > specAndResLimit) {
+        if (roleRequest.getSpecification().length() > specAndResLimit) {
             throw new ValidationException("Specifiction too long");
         }
-        if (jobRole.getCapabilityName().length() > nameLimit) {
+        if (roleRequest.getCapabilityName().length() > nameLimit) {
             throw new ValidationException("Capability name too long");
         }
-        if (jobRole.getBandName().length() > nameLimit) {
+        if (roleRequest.getBandName().length() > nameLimit) {
             throw new ValidationException("Band name too long");
         }
-        if (jobRole.getResponsibilities().length() > specAndResLimit) {
+        if (roleRequest.getResponsibilities().length() > specAndResLimit) {
             throw new ValidationException("Responsibilities too long");
         }
 
-        if (!isURL(jobRole.getSharepointLink())) {
+        if (!isURL(roleRequest.getSharepointLink())) {
 
             throw new ValidationException("Not a valid URL");
         }

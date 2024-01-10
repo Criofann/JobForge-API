@@ -4,7 +4,7 @@ import io.swagger.annotations.Api;
 
 import org.eclipse.jetty.http.HttpStatus;
 import org.kainos.ea.api.RoleService;
-import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.RoleRequest;
 
 import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.client.FailedToCreateJobException;
@@ -55,9 +55,9 @@ public class RoleController {
     @POST
     @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createJobRole(JobRole jobRole) {
+    public Response createJobRole(RoleRequest roleRequest) {
         try {
-            roleService.createJob(jobRole);
+            roleService.createJob(roleRequest);
             return Response.ok().build();
 
         } catch (SQLException | FailedToCreateJobException e) {

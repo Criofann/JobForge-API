@@ -1,6 +1,6 @@
 package org.kainos.ea.validator;
 
-import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.client.ValidationException;
 import org.kainos.ea.core.JobValidator;
 
@@ -14,7 +14,7 @@ public class JobValidatorTest {
     private final JobValidator jobValidator = new JobValidator();
     @Test
     public void isValidJobShouldAssertNullWhenValidEmployee() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry",
@@ -25,11 +25,11 @@ public class JobValidatorTest {
 
         );
 
-        assertDoesNotThrow(() -> jobValidator.isValidJob(jobRole));
+        assertDoesNotThrow(() -> jobValidator.isValidJob(roleRequest));
     }
     @Test
     public void isValidJobShouldThrowJobNameTooLongExceptionWhenNameToLong() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer and too many many many Characters!!!!!!!",
                 "Job Family",
                 "The specification sumarry",
@@ -40,11 +40,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRole));
+                () -> jobValidator.isValidJob(roleRequest));
     }
     @Test
     public void isValidJobShouldThrowJobSpecTooLongExceptionWhenSpecToLong() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry not meant to be"
@@ -58,11 +58,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRole));
+                () -> jobValidator.isValidJob(roleRequest));
     }
     @Test
     public void isValidJobShouldThrowJobCapTooLongExceptionWhenCapToLong() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry",
@@ -73,11 +73,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRole));
+                () -> jobValidator.isValidJob(roleRequest));
     }
     @Test
     public void isValidJobShouldThrowJobBandTooLongExceptionWhenBandToLong() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry",
@@ -88,11 +88,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRole));
+                () -> jobValidator.isValidJob(roleRequest));
     }
     @Test
     public void isValidJobShouldThrowResTooLongExceptionWhenResToLong() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer ",
                 "Job Family",
                 "The specification sumarry",
@@ -106,11 +106,11 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRole));
+                () -> jobValidator.isValidJob(roleRequest));
     }
     @Test
     public void isValidJobShouldThrowNotURLExceptionWhenSharpointIsNotURL() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer ",
                 "Job Family",
                 "The specification sumarry",
@@ -121,6 +121,6 @@ public class JobValidatorTest {
         );
 
         assertThrows(ValidationException.class,
-                () -> jobValidator.isValidJob(jobRole));
+                () -> jobValidator.isValidJob(roleRequest));
     }
 }

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.JobForgeWebServiceApplication;
 import org.kainos.ea.JobForgeWebServiceConfiguration;
 
-import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.RoleRequest;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -29,7 +29,7 @@ public class RoleIntegrationTest {
     @Test
     void postEmployeeShouldReturnError400WithTooLongName() {
 
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer names is extended to be to long2",
                 "Job Family",
                 "The specification sumarry",
@@ -42,13 +42,13 @@ public class RoleIntegrationTest {
         Response response = APP.client().target(
                 "http://localhost:8080/api/job-roles")
                 .request()
-                .post(Entity.entity(jobRole,
+                .post(Entity.entity(roleRequest,
                         MediaType.APPLICATION_JSON_TYPE));
         Assertions.assertEquals(400, response.getStatus());
     }
     @Test
     void postEmployeeShouldReturnError400WithTooLongSpec() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry but is not alowed "
@@ -68,13 +68,13 @@ public class RoleIntegrationTest {
         Response response = APP.client().target(
                 "http://localhost:8080/api/job-roles")
                 .request()
-                .post(Entity.entity(jobRole,
+                .post(Entity.entity(roleRequest,
                         MediaType.APPLICATION_JSON_TYPE));
         Assertions.assertEquals(400, response.getStatus());
     }
     @Test
     void postEmployeeShouldReturnError400WithTooLongCapabilityName() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry",
@@ -88,13 +88,13 @@ public class RoleIntegrationTest {
         Response response = APP.client().target(
                 "http://localhost:8080/api/job-roles")
                 .request()
-                .post(Entity.entity(jobRole,
+                .post(Entity.entity(roleRequest,
                         MediaType.APPLICATION_JSON_TYPE));
         Assertions.assertEquals(400, response.getStatus());
     }
     @Test
     void postEmployeeShouldReturnError400WithTooLongBandName() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer",
                 "Job Family",
                 "The specification sumarry",
@@ -107,13 +107,13 @@ public class RoleIntegrationTest {
         Response response = APP.client().target(
                 "http://localhost:8080/api/job-roles")
                 .request()
-                .post(Entity.entity(jobRole,
+                .post(Entity.entity(roleRequest,
                         MediaType.APPLICATION_JSON_TYPE));
         Assertions.assertEquals(400, response.getStatus());
     }
     @Test
     void postEmployeeShouldReturnError400WithTooLongResponsibilities() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer names is extended to be to long",
                 "Job Family",
                 "The specification sumarry",
@@ -130,13 +130,13 @@ public class RoleIntegrationTest {
         Response response = APP.client().target(
                 "http://localhost:8080/api/job-roles")
                 .request()
-                .post(Entity.entity(jobRole,
+                .post(Entity.entity(roleRequest,
                         MediaType.APPLICATION_JSON_TYPE));
         Assertions.assertEquals(400, response.getStatus());
     }
     @Test
     void postEmployeeShouldReturnError400WithInvalidSharePointLink() {
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "Software engineer names is extended to be to long",
                 "Job Family",
                 "The specification sumarry",
@@ -149,7 +149,7 @@ public class RoleIntegrationTest {
         Response response = APP.client().target(
                 "http://localhost:8080/api/job-roles")
                 .request()
-                .post(Entity.entity(jobRole,
+                .post(Entity.entity(roleRequest,
                         MediaType.APPLICATION_JSON_TYPE));
         Assertions.assertEquals(400, response.getStatus());
     }
@@ -159,7 +159,7 @@ public class RoleIntegrationTest {
         // if data is already in the database this will fail
         // because of primary key constraints change
         // data or delete the data form the dataBase
-        JobRole jobRole = new JobRole(
+        RoleRequest roleRequest = new RoleRequest(
                 "deleteme",
                 "engineering",
                 "The specification sumarry",
@@ -172,7 +172,7 @@ public class RoleIntegrationTest {
         Response response  = APP.client().target(
                 "http://localhost:8080/api/job-roles")
                 .request()
-                .post(Entity.entity(jobRole,
+                .post(Entity.entity(roleRequest,
                         MediaType.APPLICATION_JSON_TYPE));
 
         Assertions.assertEquals(200, response.getStatus());
