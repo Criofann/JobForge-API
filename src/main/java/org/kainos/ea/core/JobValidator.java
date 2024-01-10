@@ -22,7 +22,7 @@ public class JobValidator {
         if (jobRequest.getRoleName().length() > nameLimit) {
             throw new JobNameTooLongException();
         }
-        if (jobRequest.getJobFamily().length() > 20) {
+        if (jobRequest.getJobFamily().length() > nameLimit) {
             System.out.println("job Family too long");
             throw new JobFamilyTooLongException();
         }
