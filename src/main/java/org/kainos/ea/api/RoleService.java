@@ -32,6 +32,7 @@ public class RoleService {
     public List<BandRole> getBandRole() throws FailedToGetRolesException {
         List<BandRole> roleList;
         try {
+            System.out.println(" Role Service Test");
             roleList = roleDao.getBandRole();
 
         } catch (SQLException e) {

@@ -5,7 +5,6 @@ import org.kainos.ea.api.RoleService;
 import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDAO;
-
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
@@ -35,7 +34,7 @@ public class RoleController {
     }
 
     @GET
-    @Path("/BandRole")
+    @Path("/band-role")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBandRole() {
         try {

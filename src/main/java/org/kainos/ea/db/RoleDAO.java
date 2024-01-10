@@ -13,7 +13,6 @@ public class RoleDAO {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Role> getRoles() throws SQLException {
         Connection c = databaseConnector.getConnection();
-
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(
                 "SELECT RoleName, Specification, \n"
@@ -35,27 +34,26 @@ public class RoleDAO {
     }
     public List<BandRole> getBandRole() throws SQLException {
         Connection c = databaseConnector.getConnection();
-
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(
-                "SELECT JobRole.RoleName, JobRole.Specification,"
-                        + " JobRole.Responsibilities, \n"
-                        + "JobRole.SharepointLink, JobRole.BandLevel,\n"
-                        + " Band.BandLevel FROM JobRole\n"
-                        + "JOIN Band ON JobRole.BandName = Band.BandName;");
+                "SELECT JobRole.RoleName, JobRole.Specification, "
+                        + "JobRole.Responsibilities, "
+                        + "JobRole.SharepointLink,Band.BandLevel "
+                        + "FROM JobRole JOIN Band ON "
+                        + "JobRole.BandName = Band.BandName;");
 
-        List<BandRole> roleList = new ArrayList<>();
+        List<BandRole> bandRoleList = new ArrayList<>();
 
         while (rs.next()) {
-            BandRole bandRole = new BandRole(
+            BandRole bandRoleInfo = new BandRole(
                     rs.getString("RoleName"),
                     rs.getString("Specification"),
                     rs.getString("Responsibilities"),
                     rs.getString("SharepointLink"),
                     rs.getString("BandLevel")
             );
-            roleList.add(bandRole);
+            bandRoleList.add(bandRoleInfo);
         }
-        return roleList;
+        return bandRoleList;
     }
 }
