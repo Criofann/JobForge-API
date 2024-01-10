@@ -1,49 +1,39 @@
 package org.kainos.ea.core;
 
 import org.kainos.ea.cli.JobRequest;
-import org.kainos.ea.client.NotURLException;
-import org.kainos.ea.client.JobCapabilityTooLongException;
-import org.kainos.ea.client.JobSpecTooLongException;
-import org.kainos.ea.client.JobNameTooLongException;
-import org.kainos.ea.client.JobBandTooLongException;
-import org.kainos.ea.client.JobFamilyTooLongException;
-import org.kainos.ea.client.ResponsibilityTooLongException;
+import org.kainos.ea.client.ValidationException;
+
 
 import java.net.URL;
 
 public class JobValidator {
-    public Boolean isValidJob(JobRequest jobRequest) throws
-            JobNameTooLongException, JobSpecTooLongException,
-            JobBandTooLongException, ResponsibilityTooLongException,
-            NotURLException, JobCapabilityTooLongException,
-            JobFamilyTooLongException {
+    public void isValidJob(JobRequest jobRequest) throws
+            ValidationException {
         int nameLimit = 20;
         int specAndResLimit = 100;
         if (jobRequest.getRoleName().length() > nameLimit) {
-            throw new JobNameTooLongException();
+            throw new ValidationException("Role name too long");
         }
         if (jobRequest.getJobFamily().length() > nameLimit) {
-            System.out.println("job Family too long");
-            throw new JobFamilyTooLongException();
+            throw new ValidationException("Family name too long");
         }
         if (jobRequest.getSpecification().length() > specAndResLimit) {
-            throw new JobSpecTooLongException();
+            throw new ValidationException("Specifiction too long");
         }
         if (jobRequest.getCapabilityName().length() > nameLimit) {
-            throw new JobCapabilityTooLongException();
+            throw new ValidationException("Capability name too long");
         }
         if (jobRequest.getBandName().length() > nameLimit) {
-            throw new JobBandTooLongException();
+            throw new ValidationException("Band name too long");
         }
         if (jobRequest.getResponsibilities().length() > specAndResLimit) {
-            throw new ResponsibilityTooLongException();
+            throw new ValidationException("Responsibilities too long");
         }
 
         if (!isURL(jobRequest.getSharepointLink())) {
 
-            throw new NotURLException();
+            throw new ValidationException("Not a valid URL");
         }
-        return true;
     }
 
     private boolean isURL(String sharepointLink) {

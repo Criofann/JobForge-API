@@ -1,29 +1,19 @@
 package org.kainos.ea.validator;
 
 import org.kainos.ea.cli.JobRequest;
-import org.kainos.ea.client.NotURLException;
-import org.kainos.ea.client.JobCapabilityTooLongException;
-import org.kainos.ea.client.JobSpecTooLongException;
-import org.kainos.ea.client.JobNameTooLongException;
-import org.kainos.ea.client.JobBandTooLongException;
-import org.kainos.ea.client.JobFamilyTooLongException;
-import org.kainos.ea.client.ResponsibilityTooLongException;
+import org.kainos.ea.client.ValidationException;
 import org.kainos.ea.core.JobValidator;
 
 import org.junit.jupiter.api.Test;
 
-
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class JobValidatorTest {
     private final JobValidator jobValidator = new JobValidator();
     @Test
-    public void isValidJobShouldAssertNullWhenValidEmployee()
-            throws JobNameTooLongException, JobSpecTooLongException,
-            JobCapabilityTooLongException, JobBandTooLongException,
-            ResponsibilityTooLongException, NotURLException,
-            JobFamilyTooLongException {
+    public void isValidJobShouldAssertNullWhenValidEmployee() {
         JobRequest jobRequest = new JobRequest(
                 "Software engineer",
                 "Job Family",
@@ -35,7 +25,7 @@ public class JobValidatorTest {
 
         );
 
-        assertTrue(jobValidator.isValidJob(jobRequest));
+        assertDoesNotThrow(() -> jobValidator.isValidJob(jobRequest));
     }
     @Test
     public void isValidJobShouldThrowJobNameTooLongExceptionWhenNameToLong() {
@@ -49,7 +39,7 @@ public class JobValidatorTest {
                 "https://kainossoftwareltd.sharepoint.com/SitePages/Home.aspx"
         );
 
-        assertThrows(JobNameTooLongException.class,
+        assertThrows(ValidationException.class,
                 () -> jobValidator.isValidJob(jobRequest));
     }
     @Test
@@ -67,7 +57,7 @@ public class JobValidatorTest {
                 "https://kainossoftwareltd.sharepoint.com/SitePages/Home.aspx"
         );
 
-        assertThrows(JobSpecTooLongException.class,
+        assertThrows(ValidationException.class,
                 () -> jobValidator.isValidJob(jobRequest));
     }
     @Test
@@ -82,7 +72,7 @@ public class JobValidatorTest {
                 "https://kainossoftwareltd.sharepoint.com/SitePages/Home.aspx"
         );
 
-        assertThrows(JobCapabilityTooLongException.class,
+        assertThrows(ValidationException.class,
                 () -> jobValidator.isValidJob(jobRequest));
     }
     @Test
@@ -97,7 +87,7 @@ public class JobValidatorTest {
                 "https://kainossoftwareltd.sharepoint.com/SitePages/Home.aspx"
         );
 
-        assertThrows(JobBandTooLongException.class,
+        assertThrows(ValidationException.class,
                 () -> jobValidator.isValidJob(jobRequest));
     }
     @Test
@@ -115,7 +105,7 @@ public class JobValidatorTest {
                 "https://kainossoftwareltd.sharepoint.com/SitePages/Home.aspx"
         );
 
-        assertThrows(ResponsibilityTooLongException.class,
+        assertThrows(ValidationException.class,
                 () -> jobValidator.isValidJob(jobRequest));
     }
     @Test
@@ -130,7 +120,7 @@ public class JobValidatorTest {
                 "notavalidlink"
         );
 
-        assertThrows(NotURLException.class,
+        assertThrows(ValidationException.class,
                 () -> jobValidator.isValidJob(jobRequest));
     }
 }

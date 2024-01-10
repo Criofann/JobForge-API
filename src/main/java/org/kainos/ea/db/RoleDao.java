@@ -40,7 +40,7 @@ public class RoleDao {
     }
 
 
-    public int createJob(JobRequest jobRequest, Connection conn)
+    public void createJob(JobRequest jobRequest, Connection conn)
             throws SQLException {
         Connection c =  conn;
         String insertStatment = "INSERT INTO  JobRole ("
@@ -59,9 +59,7 @@ public class RoleDao {
 
 
         st.executeUpdate();
-
-
-        return 0;
+        // if insert fails error will be thrown
     }
 
 }

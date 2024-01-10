@@ -169,14 +169,13 @@ public class RoleServiceTest {
                 "https://kainossoftwareltd.sharepoint.com/SitePages/Home.aspx"
         );
 
-        int id = APP.client().target(
+        Response response  = APP.client().target(
                 "http://localhost:8080/api/job-roles")
                 .request()
                 .post(Entity.entity(jobRequest,
-                        MediaType.APPLICATION_JSON_TYPE))
-                .readEntity(Integer.class);
+                        MediaType.APPLICATION_JSON_TYPE));
 
-        Assertions.assertNotNull(id);
+        Assertions.assertEquals(200, response.getStatus());
     }
 
 }

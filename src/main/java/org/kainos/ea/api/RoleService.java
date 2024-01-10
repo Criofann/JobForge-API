@@ -2,19 +2,15 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.JobRequest;
 import org.kainos.ea.cli.Role;
+
+import org.kainos.ea.client.FailedToCreateJobException;
+import org.kainos.ea.client.FailedToGetRolesException;
+import org.kainos.ea.client.InvalidJobException;
+import org.kainos.ea.client.ValidationException;
 import org.kainos.ea.core.JobValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
-import org.kainos.ea.client.FailedToGetRolesException;
-import org.kainos.ea.client.FailedToCreateJobException;
-import org.kainos.ea.client.NotURLException;
-import org.kainos.ea.client.JobCapabilityTooLongException;
-import org.kainos.ea.client.JobSpecTooLongException;
-import org.kainos.ea.client.JobNameTooLongException;
-import org.kainos.ea.client.JobBandTooLongException;
-import org.kainos.ea.client.JobFamilyTooLongException;
-import org.kainos.ea.client.InvalidJobException;
-import org.kainos.ea.client.ResponsibilityTooLongException;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -49,26 +45,15 @@ public class RoleService {
 
     }
 
-    public int createJob(JobRequest jobRequest)
+    public void createJob(JobRequest jobRequest)
             throws FailedToCreateJobException,
-            SQLException, InvalidJobException {
-       try {
-           Boolean validation = jobValidator.isValidJob(jobRequest);
-           int id;
-           try {
-               id = roleDao.createJob(jobRequest,
-                       databaseConnector.getConnection());
-               return id;
-           } catch (SQLException e) {
-               throw new SQLException();
-           }
+            SQLException, InvalidJobException,
+            ValidationException {
+          jobValidator.isValidJob(jobRequest);
 
-       } catch (JobNameTooLongException | JobSpecTooLongException
-                | JobCapabilityTooLongException
-                | JobBandTooLongException | ResponsibilityTooLongException
-                | NotURLException | JobFamilyTooLongException e) {
-            throw new RuntimeException(e);
-       }
+          roleDao.createJob(jobRequest,
+                  databaseConnector.getConnection());
+
     }
 }
 
