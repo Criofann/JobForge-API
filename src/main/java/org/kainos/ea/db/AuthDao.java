@@ -42,7 +42,7 @@ public class AuthDao {
             String query = "SELECT Password FROM `User` WHERE Email = ?";
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, login.getUsername());
-            ResultSet rs = st.executeQuery("SELECT Password FROM `User` WHERE Email = '" + login.getUsername() + "'");
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 return encoder.matches(login.getPassword(), rs.getString("password"));
             }
