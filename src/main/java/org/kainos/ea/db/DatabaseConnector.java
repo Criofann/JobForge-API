@@ -13,47 +13,40 @@ public class DatabaseConnector {
 
     private static Connection connection;
 
-    public DatabaseProperties getDatabaseProperties() {
-        String username = System.getenv(ENV_DB_USERNAME);
-        String password = System.getenv(ENV_DB_PASSWORD);
-        String host = System.getenv(ENV_DB_HOST);
-        String name = System.getenv(ENV_DB_NAME);
-
-        return new DatabaseProperties(username, password, host, name);
-    }
-
-    public Connection getConnection(DatabaseProperties props)
-            throws SQLException {
-        return DriverManager.getConnection(
-                "jdbc:mysql://" + props.getHost() + "/" + props.getName()
-                        + "?useSSL=false",
-                props.getUsername(), props.getPassword());
-    }
-
     public Connection getConnection()
             throws SQLException {
-        if (DatabaseConnector.connection != null
-                && !DatabaseConnector.connection.isClosed()) {
-            return DatabaseConnector.connection;
+        String user;
+        String password;
+        String host;
+        String name;
+
+        if (connection != null
+                && !connection.isClosed()) {
+            return connection;
         }
 
         try {
-            DatabaseProperties props = getDatabaseProperties();
+            user = System.getenv("DB_USERNAME");
+            password = System.getenv("DB_PASSWORD");
+            host = System.getenv("DB_HOST");
+            name = System.getenv("DB_NAME");
+            if (user == null || password == null
+                    || host == null || name == null) {
 
-            if (!props.isValid()) {
                 throw new IllegalArgumentException(
                         "Environment variables must be set for "
                                 + "DB_USERNAME, DB_PASSWORD, "
                                 + "DB_HOST, and DB_NAME."
                 );
             }
-
-            DatabaseConnector.connection = getConnection(props);
-            return DatabaseConnector.connection;
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://" + host + "/" + name
+                            + "?useSSL=false",
+                    user, password);
+            return connection;
         } catch (Exception e) {
             System.err.println(e.getMessage());
+            throw new SQLException();
         }
-
-        return null;
     }
 }

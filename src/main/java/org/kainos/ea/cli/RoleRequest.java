@@ -1,13 +1,42 @@
 package org.kainos.ea.cli;
 
-public class Role {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class RoleRequest {
     private String roleName;
+    private String jobFamily;
     private String specification;
     private String capabilityName;
     private String bandName;
     private String responsibilities;
     private String sharepointLink;
 
+    @JsonCreator
+    public RoleRequest(
+            @JsonProperty("roleName") String roleName,
+            @JsonProperty("jobFamily") String jobFamily,
+            @JsonProperty("specification") String specification,
+            @JsonProperty("capabilityName") String capabilityName,
+            @JsonProperty("bandName") String bandName,
+            @JsonProperty("responsibilities") String responsibilities,
+            @JsonProperty("sharepointLink") String sharepointLink) {
+        this.roleName = roleName;
+        this.jobFamily = jobFamily;
+        this.specification = specification;
+        this.capabilityName = capabilityName;
+        this.bandName = bandName;
+        this.responsibilities = responsibilities;
+        this.sharepointLink = sharepointLink;
+    }
+
+    public String getJobFamily() {
+        return jobFamily;
+    }
+
+    public void setJobFamily(String jobFamily) {
+        this.jobFamily = jobFamily;
+    }
 
     public String getRoleName() {
         return roleName;
@@ -57,25 +86,4 @@ public class Role {
         this.sharepointLink = sharepointLink;
     }
 
-    public Role(String roleName, String specification,
-                String capabilityName, String bandName,
-                String responsibilities, String sharepointLink) {
-        this.roleName = roleName;
-        this.specification = specification;
-        this.capabilityName = capabilityName;
-        this.bandName = bandName;
-        this.responsibilities = responsibilities;
-        this.sharepointLink = sharepointLink;
-    }
-
-    public Role(String roleName, String specification,
-                String capabilityName,
-                String responsibilities, String sharepointLink) {
-
-        this.roleName = roleName;
-        this.specification = specification;
-        this.capabilityName = capabilityName;
-        this.responsibilities = responsibilities;
-        this.sharepointLink = sharepointLink;
-    }
 }

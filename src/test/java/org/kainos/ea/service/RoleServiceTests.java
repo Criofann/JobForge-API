@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.api.RoleService;
 import org.kainos.ea.cli.Role;
 import org.kainos.ea.client.FailedToGetRolesException;
+import org.kainos.ea.core.JobValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -25,7 +26,7 @@ public class RoleServiceTests {
     private final Connection c = mock(Connection.class);
 
     private final RoleService roleService = new RoleService(
-            roleDao, databaseConnector);
+            roleDao, databaseConnector, new JobValidator());
     @Test
     public void getRolesShouldReturnRolesWhenDaoReturnsRoles() throws
             SQLException, FailedToGetRolesException {
