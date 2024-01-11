@@ -16,25 +16,29 @@ import java.sql.PreparedStatement;
     public class RoleDao {
         private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-        public Role getRoleByID(
-                String role, Connection connection) throws SQLException {
+        public Role getRoleByID
+                (
+                String role, Connection conn) throws SQLException {
 
-            Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery("SELECT RoleName, "
+            String selectStatment = "SELECT RoleName, "
                     + "Specification, CapabilityName, BandName,"
                     + " Responsibilities, SharepointLink"
                     + " FROM `JobRole` WHERE RoleName="
-                            + "'" + role + "'");
+                    +  "VALUES(?)";
+            PreparedStatement st = conn.prepareStatement(selectStatment,
+                    Statement.RETURN_GENERATED_KEYS);
 
-            while (resultSet.next()) {
+            st.setString(1, role);
+
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
                 return new Role(
-                        resultSet.getString("RoleName"),
-                        resultSet.getString("Specification"),
-                        resultSet.getString("CapabilityName"),
-                        resultSet.getString("BandName"),
-                        resultSet.getString("Responsibilities"),
-                        resultSet.getString("SharepointLink")
+                        rs.getString("RoleName"),
+                        rs.getString("Specification"),
+                        rs.getString("CapabilityName"),
+                        rs.getString("BandName"),
+                        rs.getString("Responsibilities"),
+                        rs.getString("SharepointLink")
                 );
             }
             return null;
