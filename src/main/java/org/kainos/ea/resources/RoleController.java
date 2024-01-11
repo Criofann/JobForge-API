@@ -98,7 +98,8 @@ public class RoleController {
         } catch (RoleDoesNotExistException e) {
             System.err.println(e.getMessage());
 
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            return Response.status(
+                    Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         } catch (FailedToDeleteRoleException e) {
             System.err.println(e.getMessage());
 

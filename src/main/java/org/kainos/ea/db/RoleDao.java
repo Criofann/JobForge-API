@@ -16,12 +16,16 @@ import java.sql.PreparedStatement;
     public class RoleDao {
         private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-        public Role getRoleByID(String role, Connection connection) throws SQLException {
+        public Role getRoleByID(
+                String role, Connection connection) throws SQLException {
 
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("SELECT RoleName, Specification, CapabilityName, BandName, Responsibilities, SharepointLink" +
-                    " FROM `JobRole` WHERE RoleName=" + "'" + role + "'");
+            ResultSet resultSet = statement.executeQuery("SELECT RoleName, "
+                    + "Specification, CapabilityName, BandName,"
+                    + " Responsibilities, SharepointLink"
+                    + " FROM `JobRole` WHERE RoleName="
+                            + "'" + role + "'");
 
             while (resultSet.next()) {
                 return new Role(
@@ -36,7 +40,8 @@ import java.sql.PreparedStatement;
             return null;
         }
 
-        public void deleteRole(String roleName, Connection c) throws FailedToDeleteRoleException {
+        public void deleteRole(String roleName, Connection c)
+                throws FailedToDeleteRoleException {
 
             String deleteStatement = "DELETE FROM JobRole WHERE RoleName = ?";
 

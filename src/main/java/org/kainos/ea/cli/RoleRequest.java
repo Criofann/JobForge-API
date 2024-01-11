@@ -87,5 +87,4 @@ public class RoleRequest {
         this.sharepointLink = sharepointLink;
     }
 
-
 }

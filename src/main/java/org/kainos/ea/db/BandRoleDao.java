@@ -1,6 +1,5 @@
 package org.kainos.ea.db;
 
-import org.kainos.ea.cli.Band;
 import org.kainos.ea.cli.BandRole;
 
 import java.sql.Connection;
@@ -16,7 +15,8 @@ public class BandRoleDao {
         Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery("SELECT JobRole.*, Band.BandLevel FROM JobRole\n" +
+        ResultSet rs = st.executeQuery(
+                "SELECT JobRole.*, Band.BandLevel FROM JobRole\n" +
                 "JOIN Band ON JobRole.BandName = Band.BandName;");
 
         List<BandRole> bandRoleList = new ArrayList<>();

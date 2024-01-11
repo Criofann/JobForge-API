@@ -42,7 +42,8 @@ public class Role {
         this.capabilityName = capabilityName;
     }
 
-    public String getBandName() {return bandName;}
+    public String getBandName() {
+        return bandName; }
 
     public void setBandName(String bandName) {
         this.bandName = bandName;
