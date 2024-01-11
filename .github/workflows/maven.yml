@@ -2,15 +2,16 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, staging-branch ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, staging-branch ]
 
 env:
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
   DB_USERNAME: ${{ secrets.DB_USERNAME }}
   DB_HOST: ${{ secrets.DB_HOST }}
   DB_NAME: ${{ secrets.DB_NAME }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
 jobs:
   build:
@@ -32,3 +33,6 @@ jobs:
 
       - name: Run linter
         run: mvn checkstyle:check
+
+      - name: Run Tests
+        run: mvn clean test
