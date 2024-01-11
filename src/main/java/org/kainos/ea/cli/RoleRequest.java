@@ -5,16 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RoleRequest {
     private String roleName;
-    private String jobFamily;
     private String specification;
     private String capabilityName;
     private String bandName;
     private String responsibilities;
     private String sharepointLink;
-
-    public String getJobFamily() { return jobFamily; }
-
-    public void setJobFamily(String jobFamily) { this.jobFamily = jobFamily; }
 
     public String getRoleName() {
         return roleName;
@@ -67,18 +62,17 @@ public class RoleRequest {
     @JsonCreator
     public RoleRequest(
             @JsonProperty("RoleName") String roleName,
-            @JsonProperty("jobFamily") String jobFamily,
             @JsonProperty("Specification") String specification,
             @JsonProperty("CapabilityName") String capabilityName,
             @JsonProperty("BandName") String bandName,
             @JsonProperty("Responsibilities") String responsibilities,
             @JsonProperty("SharepointLink") String sharepointLink) {
         this.roleName = roleName;
-        this.jobFamily = jobFamily;
         this.specification = specification;
         this.capabilityName = capabilityName;
         this.bandName = bandName;
         this.responsibilities = responsibilities;
         this.sharepointLink = sharepointLink;
+
     }
 }

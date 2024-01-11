@@ -35,15 +35,15 @@ public class BandDao {
 
         ResultSet resultSet = statement.executeQuery(
                 "SELECT JobRole.RoleName, Band.BandLevel, Band.Competencies \n"
-                    + "FROM JobRole JOIN Band ON JobRole.BandName = \n"
-                    + " Band.BandName WHERE JobRole.RoleName = \n'"
-                    + roleName + "'");
+                        + "FROM JobRole JOIN Band ON JobRole.BandName = \n"
+                        + " Band.BandName WHERE JobRole.RoleName = \n'"
+                        + roleName + "'");
 
         while (resultSet.next()) {
-             return new Band(
-                roleName,
-                resultSet.getString("BandLevel"),
-                resultSet.getString("Competencies")
+            return new Band(
+                    roleName,
+                    resultSet.getString("BandLevel"),
+                    resultSet.getString("Competencies")
             );
         }
 
