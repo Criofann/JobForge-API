@@ -1,21 +1,17 @@
 package org.kainos.ea.db;
 
-
-import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.cli.Role;
+import org.kainos.ea.cli.RoleRequest;
 
-
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
 public class RoleDao {
-
-
     public List<Role> getRoles(Connection con) throws SQLException {
 
         Statement st = con.createStatement();
@@ -39,6 +35,27 @@ public class RoleDao {
         return roleList;
     }
 
+    public Role getRoleByID(String role, Connection connection) throws SQLException {
+
+        Statement statement = connection.createStatement();
+
+        ResultSet resultSet = statement.executeQuery("SELECT RoleName,"
+                + " Specification,"
+                + " CapabilityName, BandName, Responsibilities, SharepointLink"
+                + " FROM `JobRole` WHERE RoleName=" + "'" + role + "'");
+
+        while (resultSet.next()) {
+            return new Role(
+                    resultSet.getString("RoleName"),
+                    resultSet.getString("Specification"),
+                    resultSet.getString("CapabilityName"),
+                    resultSet.getString("BandName"),
+                    resultSet.getString("Responsibilities"),
+                    resultSet.getString("SharepointLink")
+                    );
+        }
+        return null;
+    }
 
     public void createJob(RoleRequest roleRequest, Connection conn)
             throws SQLException {
@@ -61,5 +78,3 @@ public class RoleDao {
     }
 
 }
-
-

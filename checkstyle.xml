@@ -38,6 +38,10 @@
     <module name="FileLength"/>
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
+<<<<<<< HEAD
+        <property name="max" value="130"/>
+=======
+>>>>>>> origin/staging-branch
     </module>
 
     <!-- Checks for whitespace                               -->
