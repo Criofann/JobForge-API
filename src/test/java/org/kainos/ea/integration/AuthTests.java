@@ -34,7 +34,7 @@ public class AuthTests {
                 .request()
                 .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(500, response.getStatus());
+        assertEquals(400, response.getStatus());
     }
 
     @Test
