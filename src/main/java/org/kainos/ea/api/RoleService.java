@@ -1,36 +1,55 @@
 package org.kainos.ea.api;
 
+import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.cli.Role;
+
 import org.kainos.ea.client.FailedToDeleteRoleException;
 import org.kainos.ea.client.FailedToGetRolesException;
 import org.kainos.ea.client.RoleDoesNotExistException;
+
+import org.kainos.ea.client.FailedToCreateJobException;
+import org.kainos.ea.client.InvalidJobException;
+import org.kainos.ea.client.ValidationException;
+import org.kainos.ea.core.JobValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 
 public class RoleService {
-    private final RoleDao roleDao;
-    private final DatabaseConnector databaseConnector;
+    private RoleDao roleDao;
+    private DatabaseConnector databaseConnector;
+    private JobValidator jobValidator;
 
-    public RoleService(RoleDao roleDao, DatabaseConnector databaseConnector) {
+    public RoleService(RoleDao roleDao, DatabaseConnector databaseConnector,
+                       JobValidator jobValidator) {
         this.roleDao = roleDao;
         this.databaseConnector = databaseConnector;
+        this.jobValidator = jobValidator;
     }
 
-    public List<Role> getRoles() throws FailedToGetRolesException {
-        List<Role> roleList;
+    public List<Role> getRoles()
+            throws FailedToGetRolesException {
         try {
-            roleList = roleDao.getRoles();
+            return roleDao.getRoles(databaseConnector.getConnection());
 
         } catch (SQLException e) {
             throw new FailedToGetRolesException();
         }
 
-        return roleList;
+    }
+
+    public void createJob(RoleRequest roleRequest)
+            throws FailedToCreateJobException,
+            SQLException, InvalidJobException,
+            ValidationException {
+          jobValidator.isValidJob(roleRequest);
+
+          roleDao.createJob(roleRequest,
+                  databaseConnector.getConnection());
+
     }
 
     public Role getRoleByID(String roleName) throws FailedToGetRolesException, RoleDoesNotExistException {
@@ -63,3 +82,4 @@ public class RoleService {
         }
     }
 }
+

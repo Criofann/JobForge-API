@@ -7,6 +7,7 @@ import org.kainos.ea.cli.Role;
 import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.client.FailedToDeleteRoleException;
 import org.kainos.ea.client.RoleDoesNotExistException;
+import org.kainos.ea.core.JobValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RoleDao;
 import org.mockito.Mock;
@@ -23,13 +24,15 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class RoleServiceTest {
     RoleDao roleDao = Mockito.mock(RoleDao.class);
+    JobValidator jobValidator = Mockito.mock(JobValidator.class);
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
 
     RoleService roleService
-            = new RoleService(roleDao, databaseConnector);
+            = new RoleService(roleDao, databaseConnector, jobValidator);
 
     private final RoleRequest roleRequest = new RoleRequest(
             "Software engineer6",
+            "Engineering",
             "Job Specification",
             "A Capability",
             "Band",
@@ -43,7 +46,7 @@ public class RoleServiceTest {
     void deleteRoleShouldThrowFailedToDeleteExceptionWhenDaoThrowsFailedToDeleteException()
             throws SQLException, FailedToDeleteRoleException {
         String roleName = "name";
-        Role mockRoleResponse = new Role("Software Engineer","Develop code","Engineering","Write and test code", "Sharepoint");
+        Role mockRoleResponse = new Role("Software Engineer", "Engineering", "Develop code","Engineering","Write and test code", "Sharepoint");
 
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(roleDao.getRoleByID(roleName, conn)).thenReturn(mockRoleResponse);

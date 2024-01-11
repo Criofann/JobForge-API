@@ -9,11 +9,12 @@ import javax.validation.constraints.NotNull;
 
 public class JobForgeWebServiceConfiguration extends Configuration {
     @Valid
-    @NotNull // Test to see if it passes linter
-    private final SwaggerBundleConfiguration swagger = new SwaggerBundleConfiguration();
+    @NotNull
+    private final SwaggerBundleConfiguration swagger =
+            new SwaggerBundleConfiguration();
 
     @JsonProperty("swagger")
-    public SwaggerBundleConfiguration getSwagger(){
+    public SwaggerBundleConfiguration getSwagger() {
         swagger.setResourcePackage("org.kainos.ea.resources");
         String[] schemes = {"http", "https"};
         swagger.setSchemes(schemes);
