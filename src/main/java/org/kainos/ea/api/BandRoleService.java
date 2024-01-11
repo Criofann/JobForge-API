@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class BandRoleService {
-    BandRoleDao bandRoleDao = new BandRoleDao();
+    private final BandRoleDao bandRoleDao = new BandRoleDao();
     public List<BandRole> getBandRole() throws FailedToGetRolesException {
         List<BandRole> bandRoleList;
         try {

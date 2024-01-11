@@ -3,7 +3,9 @@ package org.kainos.ea.service;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.api.RoleService;
+import org.kainos.ea.cli.Role;
 import org.kainos.ea.cli.RoleRequest;
+import org.kainos.ea.client.FailedToDeleteRoleException;
 import org.kainos.ea.client.ValidationException;
 import org.kainos.ea.core.JobValidator;
 import org.kainos.ea.db.DatabaseConnector;
@@ -13,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.sql.Connection;
 import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 @ExtendWith(MockitoExtension.class)
 public class RoleServiceTest {
@@ -47,6 +50,32 @@ public class RoleServiceTest {
                 roleDao).createJob(roleRequest, conn);
         assertThrows(SQLException.class,
                 () -> roleService.createJob(roleRequest));
+    }
+    @Test
+    void deleteRoleThrowFailedToDeleteExceptionDaoThrowsFailedDeleteException()
+            throws SQLException, FailedToDeleteRoleException {
+        String roleName = "name";
+        Role mockRoleResponse = new Role(
+                "Software Engineer",
+                "Engineering",
+                "Develop code",
+                "Engineering",
+                "Write and test code",
+                "Sharepoint");
+
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(
+                roleDao.getRoleByID(
+                        roleName, conn)).thenReturn(
+                                mockRoleResponse);
+        Mockito.doThrow(
+                FailedToDeleteRoleException.class).when(
+                        roleDao).deleteRole(roleName, conn);
+
+        assertThrows(
+                FailedToDeleteRoleException.class,
+                () -> roleService.deleteRole(roleName));
+
     }
 }
 

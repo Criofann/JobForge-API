@@ -16,12 +16,12 @@ public class BandRoleDao {
 
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(
-                "SELECT JobRole.*, Band.BandLevel FROM JobRole\n" +
-                "JOIN Band ON JobRole.BandName = Band.BandName;");
+                "SELECT JobRole.*, Band.BandLevel FROM JobRole\n"
+                + "JOIN Band ON JobRole.BandName = Band.BandName;");
 
         List<BandRole> bandRoleList = new ArrayList<>();
 
-        while (rs.next()){
+        while (rs.next()) {
             BandRole bandRole = new BandRole(
                     rs.getString("RoleName"),
                     rs.getString("Specification"),

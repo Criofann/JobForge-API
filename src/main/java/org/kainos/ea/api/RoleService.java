@@ -52,9 +52,11 @@ public class RoleService {
 
     }
 
-    public Role getRoleByID(String roleName) throws FailedToGetRolesException, RoleDoesNotExistException {
+    public Role getRoleByID(String roleName)
+            throws FailedToGetRolesException, RoleDoesNotExistException {
         try {
-            Role role = roleDao.getRoleByID(roleName, databaseConnector.getConnection());
+            Role role = roleDao.getRoleByID(
+                    roleName, databaseConnector.getConnection());
             if (role == null) {
                 throw new RoleDoesNotExistException();
             }
@@ -66,9 +68,12 @@ public class RoleService {
         }
     }
 
-    public void deleteRole(String roleName )  throws RoleDoesNotExistException, FailedToDeleteRoleException {
+    public void deleteRole(String roleName)
+            throws RoleDoesNotExistException,
+            FailedToDeleteRoleException {
         try {
-            Role roleToDelete = roleDao.getRoleByID(roleName, databaseConnector.getConnection());
+            Role roleToDelete = roleDao.getRoleByID(
+                    roleName, databaseConnector.getConnection());
 
             if (roleToDelete == null) {
                 throw new RoleDoesNotExistException();
