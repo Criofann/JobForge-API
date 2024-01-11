@@ -16,8 +16,7 @@ import java.sql.PreparedStatement;
     public class RoleDao {
         private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-        public Role getRoleByID
-                (
+        public Role getRoleByID(
                 String role, Connection conn) throws SQLException {
 
             String selectStatment = "SELECT RoleName, "
