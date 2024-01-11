@@ -40,12 +40,12 @@ CREATE TABLE IF NOT EXISTS JobFamily(
 );
 
 CREATE TABLE IF NOT EXISTS JobRole(
-	RoleName VARCHAR(20) PRIMARY KEY,
+	RoleName VARCHAR(50) PRIMARY KEY,
     Specification VARCHAR(100),
     CapabilityName VARCHAR(20),
     BandName VARCHAR(20),
     Responsibilities VARCHAR(100),
-    SharepointLink VARCHAR(100),
+    SharepointLink VARCHAR(400),
     FOREIGN KEY(BandName) REFERENCES Band(BandName),
     FOREIGN KEY(CapabilityName) REFERENCES Capability(CapabilityName)
 );

@@ -11,7 +11,6 @@ How to test the JobForgeWebService application
 ---
 `mvn test`
 
-How to run the linter on the JobForgeWebService application
 ---
 `mvn checkstyle:check`
 
@@ -36,3 +35,4 @@ To use JobForgeWebService application you will need to have the following enviro
   export DB_NAME=<Add DB Schema Name Here>  
  
 ``` 
+
