@@ -19,10 +19,3 @@ CREATE TABLE `User`(
 
 INSERT INTO User(Email, Password, RoleID) VALUES('admin', 'admin', 1);
 INSERT INTO User(Email, Password, RoleID) VALUES('employee', 'employee', 2);
-
-CREATE TABLE Token(
-	Email VARCHAR(64) NOT NULL,
-    Token VARCHAR(64) NOT NULL,
-    Expiry DATETIME NOT NULL,
-    FOREIGN KEY(Email) REFERENCES User(Email)
-)

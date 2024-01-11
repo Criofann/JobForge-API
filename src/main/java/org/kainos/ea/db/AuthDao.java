@@ -43,7 +43,7 @@ public class AuthDao {
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, login.getUsername());
             ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
+            if(rs.next()) {
                 return encoder.matches(login.getPassword(), rs.getString("password"));
             }
         } catch (SQLException e) {
