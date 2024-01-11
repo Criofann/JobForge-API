@@ -6,6 +6,7 @@ import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.ea.resources.AuthController;
+import org.kainos.ea.resources.RoleController;
 
 public class JobForgeWebServiceApplication
         extends Application<JobForgeWebServiceConfiguration> {
@@ -37,5 +38,6 @@ public class JobForgeWebServiceApplication
     public void run(final JobForgeWebServiceConfiguration configuration,
                     final Environment environment) {
         environment.jersey().register(new AuthController());
+        environment.jersey().register(new RoleController());
     }
 }
