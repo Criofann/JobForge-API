@@ -8,9 +8,8 @@ import javax.validation.constraints.NotNull;
 public class JobForgeWebServiceConfiguration extends Configuration {
     @Valid
     @NotNull
-    private final SwaggerBundleConfiguration
-            swagger = new SwaggerBundleConfiguration();
-
+    private final SwaggerBundleConfiguration swagger =
+            new SwaggerBundleConfiguration();
     @JsonProperty("swagger")
     public SwaggerBundleConfiguration getSwagger() {
         swagger.setResourcePackage("org.kainos.ea.resources");
