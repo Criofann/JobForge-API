@@ -39,7 +39,9 @@ public class AuthDao {
     public boolean validLogin(Login login, Connection conn) throws ServerErrorException {
         try {
             Statement st = conn.createStatement();
-
+            String query = "SELECT Password FROM `User` WHERE Email = ?";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, login.getUsername());
             ResultSet rs = st.executeQuery("SELECT Password FROM `User` WHERE Email = '" + login.getUsername() + "'");
             while (rs.next()) {
                 return encoder.matches(login.getPassword(), rs.getString("password"));
