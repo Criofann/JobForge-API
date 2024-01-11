@@ -46,10 +46,10 @@ public class AuthDao {
             if(rs.next()) {
                 return encoder.matches(login.getPassword(), rs.getString("password"));
             }
+            return false;
         } catch (SQLException e) {
             throw new ServerErrorException("SQL Exception");
         }
-        return false;
     }
 
     public String generateToken(String username) {
@@ -60,20 +60,6 @@ public class AuthDao {
                 .setExpiration(DateUtils.addHours(currentDate, 8))
                 .signWith(hmacKey)
                 .compact();
-    }
-
-    public int registerUser(Login login, Connection conn) throws SQLException {
-        String insertStatement = "INSERT INTO `User`(Username, Password, RoleID) VALUES(?, ?, ?)";
-
-        PreparedStatement st = conn.prepareStatement(insertStatement);
-
-        st.setString(1, login.getUsername());
-        st.setString(2, login.getPassword());
-        st.setInt(3, 2);
-
-        st.executeUpdate();
-
-        return 1;
     }
 
     public Claims parseToken(String token) throws FailedToAuthenticateException, ServerErrorException {

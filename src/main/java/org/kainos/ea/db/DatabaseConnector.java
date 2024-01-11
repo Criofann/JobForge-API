@@ -1,16 +1,9 @@
 package org.kainos.ea.db;
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnector {
-
-    public static final String ENV_DB_USERNAME = "DB_USERNAME";
-    public static final String ENV_DB_PASSWORD = "DB_PASSWORD";
-    public static final String ENV_DB_HOST = "DB_HOST";
-    public static final String ENV_DB_NAME = "DB_NAME";
 
     private static Connection connection;
 
