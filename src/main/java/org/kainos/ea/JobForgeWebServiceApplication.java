@@ -7,7 +7,8 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.ea.resources.AuthController;
 
-public class JobForgeWebServiceApplication extends Application<JobForgeWebServiceConfiguration> {
+public class JobForgeWebServiceApplication
+        extends Application<JobForgeWebServiceConfiguration> {
 
     public static void main(final String[] args) throws Exception {
         new JobForgeWebServiceApplication().run(args);
@@ -19,13 +20,17 @@ public class JobForgeWebServiceApplication extends Application<JobForgeWebServic
     }
 
     @Override
-    public void initialize(final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
-        bootstrap.addBundle(new SwaggerBundle<JobForgeWebServiceConfiguration>() {
-            @Override
-            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(JobForgeWebServiceConfiguration configuration) {
-                return configuration.getSwagger();
-            }
-        });
+    public void
+    initialize(final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
+        bootstrap.addBundle(
+                new SwaggerBundle<JobForgeWebServiceConfiguration>() {
+                    @Override
+                    protected SwaggerBundleConfiguration
+                    getSwaggerBundleConfiguration(
+                            JobForgeWebServiceConfiguration configuration) {
+                        return configuration.getSwagger();
+                    }
+                });
     }
 
     @Override
