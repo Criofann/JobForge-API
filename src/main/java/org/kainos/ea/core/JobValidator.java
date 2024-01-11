@@ -14,9 +14,6 @@ public class JobValidator {
         if (roleRequest.getRoleName().length() > nameLimit) {
             throw new ValidationException("Role name too long");
         }
-        if (roleRequest.getJobFamily().length() > nameLimit) {
-            throw new ValidationException("Family name too long");
-        }
         if (roleRequest.getSpecification().length() > specAndResLimit) {
             throw new ValidationException("Specifiction too long");
         }
