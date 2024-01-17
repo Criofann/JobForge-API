@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS JobFamily(
 );
 
 CREATE TABLE IF NOT EXISTS JobRole(
-	RoleName VARCHAR(20) PRIMARY KEY,
+	RoleName VARCHAR(50) PRIMARY KEY,
     Specification VARCHAR(100),
     CapabilityName VARCHAR(20),
     BandName VARCHAR(20),

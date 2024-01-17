@@ -5,9 +5,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnector {
 
-
     private static Connection connection;
-
 
     public Connection getConnection()
             throws SQLException {
@@ -45,5 +43,4 @@ public class DatabaseConnector {
             throw new SQLException();
         }
     }
-
 }
