@@ -3,8 +3,11 @@ package org.kainos.ea.api;
 import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.cli.Role;
 
-import org.kainos.ea.client.FailedToCreateJobException;
+import org.kainos.ea.client.FailedToDeleteRoleException;
 import org.kainos.ea.client.FailedToGetRolesException;
+import org.kainos.ea.client.RoleDoesNotExistException;
+
+import org.kainos.ea.client.FailedToCreateJobException;
 import org.kainos.ea.client.InvalidJobException;
 import org.kainos.ea.client.ValidationException;
 import org.kainos.ea.core.JobValidator;
@@ -13,8 +16,6 @@ import org.kainos.ea.db.RoleDao;
 
 import java.sql.SQLException;
 import java.util.List;
-
-
 
 
 public class RoleService {
@@ -49,6 +50,41 @@ public class RoleService {
           roleDao.createJob(roleRequest,
                   databaseConnector.getConnection());
 
+    }
+
+    public Role getRoleByID(String roleName)
+            throws FailedToGetRolesException, RoleDoesNotExistException {
+        try {
+            Role role = roleDao.getRoleByID(
+                    roleName, databaseConnector.getConnection());
+            if (role == null) {
+                throw new RoleDoesNotExistException();
+            }
+            return role;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToGetRolesException();
+        }
+    }
+
+    public void deleteRole(String roleName)
+            throws RoleDoesNotExistException,
+            FailedToDeleteRoleException {
+        try {
+            Role roleToDelete = roleDao.getRoleByID(
+                    roleName, databaseConnector.getConnection());
+
+            if (roleToDelete == null) {
+                throw new RoleDoesNotExistException();
+            }
+
+            roleDao.deleteRole(roleName, databaseConnector.getConnection());
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToDeleteRoleException();
+        }
     }
 }
 

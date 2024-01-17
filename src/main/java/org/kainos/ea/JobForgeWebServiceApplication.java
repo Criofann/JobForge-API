@@ -5,6 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.kainos.ea.resources.BandController;
 import org.kainos.ea.resources.AuthController;
 import org.kainos.ea.resources.RoleController;
 
@@ -22,6 +23,7 @@ public class JobForgeWebServiceApplication
 
     @Override
     public void
+
     initialize(final Bootstrap<JobForgeWebServiceConfiguration> bootstrap) {
         bootstrap.addBundle(
                 new SwaggerBundle<JobForgeWebServiceConfiguration>() {
@@ -39,5 +41,6 @@ public class JobForgeWebServiceApplication
                     final Environment environment) {
         environment.jersey().register(new AuthController());
         environment.jersey().register(new RoleController());
+        environment.jersey().register(new BandController());
     }
 }

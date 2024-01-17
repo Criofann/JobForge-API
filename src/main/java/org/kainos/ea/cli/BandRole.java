@@ -1,22 +1,12 @@
 package org.kainos.ea.cli;
 
-public class Role {
+public class BandRole {
     private String roleName;
     private String specification;
     private String capabilityName;
-    private String bandName;
     private String responsibilities;
     private String sharepointLink;
-    public Role(String roleName, String specification,
-                String capabilityName, String bandName,
-                String responsibilities, String sharepointLink) {
-        this.roleName = roleName;
-        this.specification = specification;
-        this.capabilityName = capabilityName;
-        this.bandName = bandName;
-        this.responsibilities = responsibilities;
-        this.sharepointLink = sharepointLink;
-    }
+    private String bandLevel;
 
     public String getRoleName() {
         return roleName;
@@ -42,13 +32,6 @@ public class Role {
         this.capabilityName = capabilityName;
     }
 
-    public String getBandName() {
-        return bandName; }
-
-    public void setBandName(String bandName) {
-        this.bandName = bandName;
-    }
-
     public String getResponsibilities() {
         return responsibilities;
     }
@@ -65,4 +48,25 @@ public class Role {
         this.sharepointLink = sharepointLink;
     }
 
+    public String getBandLevel() {
+        return bandLevel;
+    }
+
+    public void setBandLevel(String bandLevel) {
+        this.bandLevel = bandLevel;
+    }
+
+
+    public BandRole(String roleName, String specification,
+                String capabilityName,
+                String responsibilities, String sharepointLink,
+                    String bandLevel) {
+
+        this.roleName = roleName;
+        this.specification = specification;
+        this.capabilityName = capabilityName;
+        this.responsibilities = responsibilities;
+        this.sharepointLink = sharepointLink;
+        this.bandLevel = bandLevel;
+    }
 }

@@ -1,9 +1,8 @@
 package org.kainos.ea.db;
 
-
 import org.kainos.ea.cli.RoleRequest;
 import org.kainos.ea.cli.Role;
-
+import org.kainos.ea.client.FailedToDeleteRoleException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,31 +12,76 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.PreparedStatement;
 
-public class RoleDao {
 
+    public class RoleDao {
+        private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-    public List<Role> getRoles(Connection con) throws SQLException {
+        public Role getRoleByID(
+                String role, Connection conn) throws SQLException {
 
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery("SELECT RoleName, Specification,"
-                + " CapabilityName,"
-                + "BandName, Responsibilities,"
-                + " SharepointLink FROM `JobRole`;");
-        List<Role> roleList = new ArrayList<>();
+            String selectStatment = "SELECT RoleName, "
+                    + "Specification, CapabilityName, BandName,"
+                    + " Responsibilities, SharepointLink"
+                    + " FROM `JobRole` WHERE RoleName="
+                    +  "VALUES(?)";
+            PreparedStatement st = conn.prepareStatement(selectStatment,
+                    Statement.RETURN_GENERATED_KEYS);
 
-        while (rs.next()) {
-            Role jobRole = new Role(
-                    rs.getString("RoleName"),
-                    rs.getString("Specification"),
-                    rs.getString("CapabilityName"),
-                    rs.getString("BandName"),
-                    rs.getString("Responsibilities"),
-                    rs.getString("SharepointLink")
-            );
-            roleList.add(jobRole);
+            st.setString(1, role);
+
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Role(
+                        rs.getString("RoleName"),
+                        rs.getString("Specification"),
+                        rs.getString("CapabilityName"),
+                        rs.getString("BandName"),
+                        rs.getString("Responsibilities"),
+                        rs.getString("SharepointLink")
+                );
+            }
+            return null;
         }
-        return roleList;
-    }
+
+        public void deleteRole(String roleName, Connection c)
+                throws FailedToDeleteRoleException {
+
+            String deleteStatement = "DELETE FROM JobRole WHERE RoleName = ?";
+
+            try {
+                PreparedStatement st = c.prepareStatement(deleteStatement);
+
+                st.setString(1, roleName);
+
+                st.executeUpdate();
+            } catch (SQLException e) {
+                throw new FailedToDeleteRoleException();
+            }
+        }
+
+
+        public List<Role> getRoles(Connection con) throws SQLException {
+
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT RoleName, Specification,"
+                    + " CapabilityName,"
+                    + "BandName, Responsibilities,"
+                    + " SharepointLink FROM `JobRole`;");
+            List<Role> roleList = new ArrayList<>();
+
+            while (rs.next()) {
+                Role jobRole = new Role(
+                        rs.getString("RoleName"),
+                        rs.getString("Specification"),
+                        rs.getString("CapabilityName"),
+                        rs.getString("BandName"),
+                        rs.getString("Responsibilities"),
+                        rs.getString("SharepointLink")
+                );
+                roleList.add(jobRole);
+            }
+            return roleList;
+        }
 
 
     public void createJob(RoleRequest roleRequest, Connection conn)

@@ -14,6 +14,7 @@ import org.kainos.ea.JobForgeWebServiceConfiguration;
 
 import org.kainos.ea.cli.RoleRequest;
 
+
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

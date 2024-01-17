@@ -12,6 +12,7 @@ public class RoleRequest {
     private String responsibilities;
     private String sharepointLink;
 
+
     @JsonCreator
     public RoleRequest(
             @JsonProperty("roleName") String roleName,
